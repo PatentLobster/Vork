@@ -4,7 +4,7 @@
             No records found.
         </div>
         <div v-else>
-                <list-item v-for="(date, index) in days" :data="date" :key="index" />
+                <list-item v-for="(date, index) in days" :lists="date" :key="index" />
         </div>
         <button v-on:click="getRows">Reload</button>
     </div>
@@ -21,11 +21,6 @@
             ...mapState([
                 'days',
             ]),
-        },
-        data: () => {
-            return {
-            rows: []
-            }
         },
         methods: {
             getRows() {
