@@ -115,11 +115,11 @@ function log_in() {
   const now = `${t.hours()}:${t.minutes()}:${t.seconds()}`;
   const doc = {
     "date": today,
-    "in": [now],
-    "out": []
+    "clockIn": [now],
+    "clockOut": []
   };
 
-  db.update({"date": today}, {$push: {"in": now}}, {}, function(err, result) {
+  db.update({"date": today}, {$push: {"clockIn": now}}, {}, function(err, result) {
     // db.findOne({date: today}, function (err, doc) {
      console.log(err, result);
         if (result === 0) {
@@ -135,13 +135,13 @@ function log_out() {
   const now = `${t.hours()}:${t.minutes()}:${t.seconds()}`;
   const doc = {
     "date": today,
-    "in": [],
-    "out": [now]
+    "clockIn": [],
+    "clockOut": [now]
   };
   db.ensureIndex({ fieldName: 'date', unique: true }, function (err) {
-    // console.log(err);
+    console.log(err);
   });
-  db.update({"date": today}, {$push: {"out": now}}, {}, function(err, result) {
+  db.update({"date": today}, {$push: {"clockOut": now}}, {}, function(err, result) {
     // db.findOne({date: today}, function (err, doc) {
     console.log(err, result);
     if (result === 0) {

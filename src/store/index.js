@@ -29,6 +29,7 @@ export default new Vuex.Store({
         commit(types.SET_DAYS, result);
       });
     },
+
   },
   modules: {
   }

@@ -4,16 +4,13 @@
         <li v-for="(r, i) in hours" :key="i">
             {{r.gotIn}} -- {{r.gotOut}}
         </li>
-        <Countdown :since="firstLogin" />
     </div>
 </template>
 
 <script>
-    import Countdown from "@/components/Countdown";
     const moment = require('moment');
     export default {
-        name: "listItem",
-        components: {Countdown},
+        name: "ListItem",
         props: [
             "lists",
         ],
@@ -26,8 +23,8 @@
         methods: {
             resetState() {
                 this.hours = [];
-                this.firstLogin = this.lists.in[0];
-                this.lists.in.reduce((acc, current) => {
+                this.firstLogin = this.lists.clockIn[0];
+                this.lists.clockIn.reduce((acc, current) => {
                     let gotIn = moment(current, 'HH:mm:ss');
                     gotIn.format("HH:mm:ss");
 
@@ -35,7 +32,7 @@
                     const BreakException = "lol"; // In order to get out of the foreach we need some sort of exception
                                                   // Ref: https://stackoverflow.com/questions/2641347/short-circuit-array-foreach-like-calling-break
                     try {
-                        this.lists.out.forEach((e) => {
+                        this.lists.clockOut.forEach((e) => {
                             let gotOut = moment(e, 'HH:mm:ss');
                             if (gotIn.isBefore(gotOut)) {
                                 this.hours.push({
