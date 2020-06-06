@@ -4,6 +4,7 @@
         <li v-for="(r, i) in hours" :key="i">
             {{r.gotIn}} -- {{r.gotOut}}
         </li>
+        <h2>Got in {{firstLogin}}</h2>
     </div>
 </template>
 
@@ -16,46 +17,33 @@
         ],
         data: () => {
             return {
-                hours: []
+                hours: [],
+                firstLogin: null
             }
         },
         created() {
+            this.firstLogin = this.data.in[0];
             this.data.in.reduce((acc, current, index) => {
                 let gotIn = moment(current, 'HH:mm:ss');
                 gotIn.format("HH:mm:ss");
-                let i = index;
-                let gotOut = moment(this.data.out[index], 'HH:mm:ss');
-                if (gotIn.isBefore(gotOut)) {
-                    this.hours.push({gotIn, gotOut});
-                } else {
-                    i++;
-                    gotOut = moment(this.data.out[i], 'HH:mm:ss');
-                    if (gotIn.isBefore(gotOut)) {
-                        const doc = {
-                            gotIn: gotIn.format("HH:mm:ss"),
-                            gotOut: gotOut.format("HH:mm:ss")};
-                        this.hours.push(doc);
-                    }
+                // let i = index;
+                console.log(index);
+                const BreakException = "lol";
+                try {
+                    this.data.out.forEach((e) => {
+                        let gotOut = moment(e, 'HH:mm:ss');
+                            if (gotIn.isBefore(gotOut)) {
+                                this.hours.push({
+                                    gotIn:  gotIn.format("HH:mm:ss"),
+                                    gotOut: gotOut.format("HH:mm:ss")
+                                });
+                                throw BreakException;
+                            }
+                        });
+                } catch (er) {
+                    if (er !== BreakException) throw er;
                 }
             }, []);
-
-            // this.data.in.forEach((e) => {
-            //     const gotIn = moment(e, 'HH:mm:ss');
-            //     console.log(gotIn);
-            //     this.data.in.reduce((acc, current, index) => {
-            //
-            //         // console.log(current, this.data.out[index]);
-            //         // return [...acc, current, this.data.out[index]]
-            //     }, []);
-            //         // this.data.out.forEach((element) => {
-            //         //     const gotOut = moment(element, 'HH:mm:ss');
-            //         //     if (gotIn.isBefore(gotOut) === true) {
-            //         //         this.hours.push({gotIn,gotOut});
-            //         //         b
-            //         //     }
-            //         // });
-            //
-            // });
         },
 
     }
