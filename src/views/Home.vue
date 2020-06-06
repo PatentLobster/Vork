@@ -1,10 +1,7 @@
 <template>
     <div>
-        <h1>hey</h1>
-        <li v-for="(date, index) in days" :key="index">
-            <list-item :data="date"/>
-        </li>
-        <button v-on:click="getRows">s</button>
+        <list-item v-for="(date, index) in days" :data="date" :key="index" />
+        <button v-on:click="getRows">Reload</button>
     </div>
 </template>
 
@@ -24,17 +21,6 @@
             return {
             rows: []
             }
-        },
-        mounted() {
-            // this.$db.loadDatabase();
-            //  this.$db.findOne({date:"2020-06-06"}, function(err, result){
-            //      console.log(result);
-            //      // this.rows = result;
-            // })
-            // this.$db.find({}, function(err, result){
-            //     console.log(result);
-            //     this.rows = result;
-            // })
         },
         methods: {
             getRows() {
