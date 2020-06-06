@@ -1,6 +1,18 @@
 <template>
     <div>
-        <list-item v-for="(date, index) in days" :data="date" :key="index" />
+        <div v-if="days.length === 0">
+            No records found.
+        </div>
+        <table v-else>
+            <thead>
+                <th>Date</th>
+                <th>In</th>
+                <th>Out</th>
+            </thead>
+            <tbody>
+                <list-item v-for="(date, index) in days" :data="date" :key="index" />
+            </tbody>
+        </table>
         <button v-on:click="getRows">Reload</button>
     </div>
 </template>
