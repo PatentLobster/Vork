@@ -6,15 +6,13 @@ import db from "@/datastore";
 import moment from "moment";
 const globalAny = global;
 globalAny.db = db;
-// db.ensureIndex({ fieldName: 'type' }, (err) => {
-//   // If there was an error, err is not null
-//   if (err) {
-//     return err
-//   }
-// })
+db.ensureIndex({ fieldName: 'date', unique: true }, function (err) {
+  // console.log(err);
+});
+
 import {
   createProtocol,
-  /* installVueDevtools */
+  // installVueDevtools
 } from 'vue-cli-plugin-electron-builder/lib'
 const isDevelopment = process.env.NODE_ENV !== 'production';
 
@@ -120,9 +118,7 @@ function log_in() {
     "in": [now],
     "out": []
   };
-  db.ensureIndex({ fieldName: 'date', unique: true }, function (err) {
-    // console.log(err);
-  });
+
   db.update({"date": today}, {$push: {"in": now}}, {}, function(err, result) {
     // db.findOne({date: today}, function (err, doc) {
      console.log(err, result);
