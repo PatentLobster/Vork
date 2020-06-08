@@ -6,7 +6,7 @@
             No records found.
         </div>
         <div v-else>
-                <list-item v-for="(date, index) in days" :lists="date" :key="index" />
+                <list-item v-for="date in days" :lists="date" :key="date.date" />
         </div>
         <button v-on:click="getRows">Reload</button>
         <Countdown/>

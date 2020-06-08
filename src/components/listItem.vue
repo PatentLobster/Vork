@@ -1,9 +1,10 @@
 <template>
     <div v-on:click="showHours">
-        <div v-if="!showingHours">
-            <h3>{{CurrentDay}}</h3>
+        <div >
+            <h2>{{CurrentDay}}</h2>
+            <h4>{{CurrentHumanDay}}</h4>
         </div>
-        <div v-else>
+        <div v-if="showingHours">
             <li v-for="(r, i) in hours" :key="i">
                 {{r.gotIn}} -- {{r.gotOut}}
             </li>
@@ -28,6 +29,9 @@
         computed: {
           CurrentDay() {
               return moment(this.lists.date).format("Do");
+          },
+          CurrentHumanDay() {
+              return moment(this.lists.date).format("dddd");
           },
         },
         methods: {
