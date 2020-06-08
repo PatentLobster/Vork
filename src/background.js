@@ -34,7 +34,7 @@ function createWindow () {
   if (process.env.WEBPACK_DEV_SERVER_URL) {
     // Load the url of the dev server if in development mode
     win.loadURL(process.env.WEBPACK_DEV_SERVER_URL)
-    if (!process.env.IS_TEST) win.webContents.openDevTools()
+    // if (!process.env.IS_TEST) win.webContents.openDevTools()
   } else {
     createProtocol('app')
     // Load the index.html when not in development
@@ -110,9 +110,9 @@ if (isDevelopment) {
 
 function log_in() {
   let datetime = new Date();
-  let today = datetime.toISOString().slice(0, 10);
-  let t = moment(datetime, "HH:mm:ss");
-  const now = `${t.hours()}:${t.minutes()}:${t.seconds()}`;
+  const t = moment(datetime);
+  const today = t.format("YYYY-MM-DD");
+  const now = t.format("HH:mm:ss");
   const doc = {
     "date": today,
     "clockIn": [now],
@@ -130,9 +130,9 @@ function log_in() {
 
 function log_out() {
   let datetime = new Date();
-  let today = datetime.toISOString().slice(0, 10);
-  let t = moment(datetime, "HH:mm:ss");
-  const now = `${t.hours()}:${t.minutes()}:${t.seconds()}`;
+  const t = moment(datetime);
+  const today = t.format("YYYY-MM-DD");
+  const now = t.format("HH:mm:ss");
   const doc = {
     "date": today,
     "clockIn": [],

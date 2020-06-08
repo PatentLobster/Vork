@@ -3,6 +3,7 @@ import VueRouter from "vue-router";
 import App from './App.vue'
 import store from './store'
 import Home from "@/views/Home";
+require('@/assets/main.scss');
 
 Vue.config.productionTip = false;
 

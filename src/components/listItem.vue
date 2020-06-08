@@ -1,6 +1,6 @@
 <template>
-    <div v-on:click="showHours">
-        <div >
+<div v-on:click="showHours" class="home-day" :class="{active: showingHours}">
+        <div class="cal-mode">
             <h2>{{CurrentDay}}</h2>
             <h4>{{CurrentHumanDay}}</h4>
         </div>

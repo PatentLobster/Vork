@@ -45,6 +45,6 @@
     }
 </script>
 
-<style scoped>
+<style type="scss">
 
 </style>
