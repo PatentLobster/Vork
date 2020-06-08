@@ -1,9 +1,13 @@
 <template>
-    <div>
-        <h1>{{lists.date}}</h1>
-        <li v-for="(r, i) in hours" :key="i">
-            {{r.gotIn}} -- {{r.gotOut}}
-        </li>
+    <div v-on:click="showHours">
+        <div v-if="!showingHours">
+            <h1>{{CurrentDay}}</h1>
+        </div>
+        <div v-else>
+            <li v-for="(r, i) in hours" :key="i">
+                {{r.gotIn}} -- {{r.gotOut}}
+            </li>
+        </div>
     </div>
 </template>
 
@@ -17,10 +21,19 @@
         data: () => {
             return {
                 hours: [],
-                firstLogin: null
+                firstLogin: null,
+                showingHours: false
             }
         },
+        computed: {
+          CurrentDay() {
+              return moment(this.lists.date).format("DD");
+          }
+        },
         methods: {
+            showHours() {
+              this.showingHours = !this.showingHours;
+            },
             resetState() {
                 this.hours = [];
                 this.firstLogin = this.lists.clockIn[0];
@@ -48,13 +61,6 @@
                     }
 
                 }, []);
-                // this.hours.filter((hour) => {
-                //     console.log(hour.gotIn);
-                //     if(hour.gotIn in this.lists.in) {
-                //         console.log ("t")
-                //     };
-                // });
-
             }
 
         },

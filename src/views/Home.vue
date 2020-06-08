@@ -1,5 +1,6 @@
 <template>
     <div>
+        <h1>{{currentMonth}}</h1>
         <div v-if="days.length === 0">
             No records found.
         </div>
@@ -21,7 +22,7 @@
         name: "Home",
         components: {Countdown, ListItem},
         computed: {
-            currentMonth: () => {return moment(new Date(), "YYYY-MM").format("YYYY-MM");},
+            currentMonth: () => {return moment(new Date(), "YYYY-MM-DD").format("YYYY-MM");},
             ...mapState([
                 'days',
             ]),

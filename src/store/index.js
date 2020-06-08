@@ -24,7 +24,7 @@ export default new Vuex.Store({
       state.today =payload;
     },
     [types.SET_DAYS](state, payload) {
-      state.days = payload;
+      state.days = payload.reverse();
     },
     [types.SET_CURRENT](state, payload) {
       state.firstLogin = payload[0];
