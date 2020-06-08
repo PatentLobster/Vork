@@ -26,11 +26,10 @@
                 const hoursToGo = 9;
                 const goal = moment(this.firstLogin, "HH:mm:ss").add(hoursToGo, "hours");
                 const now = moment(new Date(), "HH:mm:ss");
-                let sum = moment.duration(goal.diff(now));
-                this.timeLeft =  `${sum.hours()}:${sum.minutes()}:${sum.seconds()}`;
-                if (sum.seconds() >= 0 ) {
+                const offset = goal.diff(now);
+                this.timeLeft =  moment.utc(offset).format("HH:mm:ss");
+                if (offset > 0)
                     setTimeout(this.updateClock, 1000);
-                }
             }
         },
         created() {

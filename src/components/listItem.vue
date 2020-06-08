@@ -4,7 +4,7 @@
             <h2>{{CurrentDay}}</h2>
             <h4>{{CurrentHumanDay}}</h4>
         </div>
-        <div v-if="showingHours">
+        <div v-if="showingHours" class="showing">
             <li v-for="(r, i) in hours" :key="i">
                 {{r.gotIn}} -- {{r.gotOut}}
             </li>

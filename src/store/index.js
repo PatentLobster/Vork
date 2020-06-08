@@ -35,7 +35,7 @@ export default new Vuex.Store({
     [types.FETCH_ALL_DAYS]({commit}) {
       db.find({}, (err, result) => {
         commit(types.SET_DAYS, result);
-        const today = moment(new Date(), "YYYY-MM-DD").format("YYYY-MM-DD")
+        const today = moment(new Date(), "YYYY-MM-DD").format("YYYY-MM-DD");
         // console.log(this.firstLogin);
         // console.log("days", this.days);
         let todayObj = result.filter(obj => {
@@ -61,7 +61,7 @@ export default new Vuex.Store({
     [types.FETCH_CURRENT]({commit}) {
       db.find({}, (err, result) => {
         commit(types.SET_DAYS, result);
-        const today = moment(new Date(), "YYYY-MM-DD").format("YYYY-MM-DD")
+        const today = moment(new Date(), "YYYY-MM-DD").format("YYYY-MM-DD");
         // console.log(this.firstLogin);
         // console.log("days", this.days);
         let todayObj = this.days.filter(obj => {

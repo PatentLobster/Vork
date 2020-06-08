@@ -5,7 +5,7 @@
         <div v-if="days.length === 0">
             No records found.
         </div>
-        <div v-else>
+        <div v-else class="list-wrapper">
                 <list-item v-for="date in days" :lists="date" :key="date.date" />
         </div>
         <button v-on:click="getRows">Reload</button>

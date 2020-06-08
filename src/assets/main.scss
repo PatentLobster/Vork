@@ -78,27 +78,75 @@ select {
   }
 }
 
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+}
+
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: #ddd;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #666;
+}
+
 // END OF RESET CSS
+.list-wrapper{
+  display: grid;
+  grid-gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(255px, 1fr));
+  justify-items: center;
+
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+}
 
 .home-day {
-  display: inline-block;
-  width: 150px;
-  height: 150px;
-  margin: 0 auto;
-  padding: 0.3rem;
+  //display: inline-block;
+  width: 250px;
+  height: 250px;
+  margin: 1rem;
+  padding: 0rem;
 }
 
 .home-day.active{
-  overflow-y: scroll;
+  overflow-y: overlay;
 }
 
-.home-day .cal-mode {
+.home-day
+.cal-mode {
   position: relative;
-  top: 25px;
+  top: 125px;
   text-align: center;
 }
-.home-day.active .cal-mode {
-  position: initial;
+
+.home-day.active
+.cal-mode {
   top: initial;
   text-align: center;
 }
+
+.showing{
+  display: inline-block;
+}
+
+.counter {
+  background-color: rgba(51, 51, 51, 0.8);
+  color: #fff;
+  padding: 0.5rem;
+  position: fixed;
+  bottom: 0px;
+  width: 100%;
+  text-align: center;
+  margin: 0 auto;
+}
+
