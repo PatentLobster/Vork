@@ -7,7 +7,7 @@
                 <list-item v-for="(date, index) in days" :lists="date" :key="index" />
         </div>
         <button v-on:click="getRows">Reload</button>
-        <Countdown :since="firstLogin" />
+        <Countdown/>
     </div>
 </template>
 
@@ -21,32 +21,22 @@
         name: "Home",
         components: {Countdown, ListItem},
         computed: {
+            currentMonth: () => {return moment(new Date(), "YYYY-MM").format("YYYY-MM");},
             ...mapState([
                 'days',
             ]),
         },
-        data: () => {
-            return {
-                firstLogin: null,
-            }
-        },
         methods: {
             getRows() {
-                this.FETCH_DAYS();
+                this.FETCH_DAYS(this.currentMonth);
             },
             ...mapActions([
                 types.FETCH_DAYS,
             ]),
         },
         created() {
-            this.FETCH_DAYS();
-            const today = moment(new Date(), "YYYY-MM-DD").format("YYYY-MM-DD")
-            // console.log(this.firstLogin);
-            // console.log("days", this.days);
-            let todayObj = this.days.filter(obj => {
-                return obj.date == today;
-            });
-            this.firstLogin = todayObj[0].clockIn[0];
+            console.log(this.currentMonth);
+            this.FETCH_DAYS(this.currentMonth);
         },
     }
 </script>
