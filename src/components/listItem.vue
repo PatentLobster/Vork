@@ -1,14 +1,16 @@
 <template>
-<div v-on:click="showHours" class="home-day" :class="{active: showingHours}">
+<div v-on:click="showHours" class="home-day" :class="[showingHours ? 'active' : '' , ClassObj]">
         <div class="cal-mode">
             <h2>{{CurrentDay}}</h2>
             <h4>{{CurrentHumanDay}}</h4>
         </div>
-        <div v-if="showingHours" class="showing">
-            <li v-for="(r, i) in hours" :key="i">
-                {{r.gotIn}} -- {{r.gotOut}}
-            </li>
-        </div>
+        <transition>
+            <div class="showing">
+                <li v-for="(r, i) in hours" :key="i">
+                    {{r.gotIn}} -- {{r.gotOut}}
+                </li>
+            </div>
+        </transition>
     </div>
 </template>
 
@@ -23,7 +25,8 @@
             return {
                 hours: [],
                 firstLogin: null,
-                showingHours: false
+                showingHours: false,
+                colorClass: ""
             }
         },
         computed: {
@@ -33,6 +36,9 @@
           CurrentHumanDay() {
               return moment(this.lists.date).format("dddd");
           },
+          ClassObj() {
+              return "co-" + Math.floor(Math.floor(Math.random() * 10)% 11 + 1);
+          }
         },
         methods: {
             showHours() {
@@ -70,6 +76,7 @@
         },
         created() {
             this.resetState()
+            this.colorClass = "co-" + Math.floor(Math.floor(Math.random() * 10)% 11 + 1) ;
         },
         watch: {
             lists: function (n, o) {if (n !== o) {
