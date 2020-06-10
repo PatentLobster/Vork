@@ -45,12 +45,18 @@ export default new Vuex.Store({
     [types.FETCH_DAYS]({commit}, month)  {
       db.find({date:  new RegExp(`\\b${month}[^]*\\b`, 'i')}, (err, result) => {
         let response = [];
+        let i;
+        let index = 0;
 
         const dateObj = new Date();
         const lastDay = parseInt(moment(dateObj, "YYYY-MM-DD").endOf("month").format("DD"));
+        const firstDay = parseInt(moment(dateObj, "YYYY-MM-DD").startOf("month").format("E"));
+        const prevMonthLastDay = parseInt(moment(month, "YYYY-MM").subtract(1, "month").endOf("month").format("DD"));
+        const lastMonth = moment(month, "YYYY-MM").subtract(1, "month").endOf("month").format("YYYY-MM");
+
 
         // Fill the blank spots.
-        let i;
+        i=1;
         for (i = 1; i <= parseInt(lastDay); i++) {
           const d = (i < 10)? `0${i}` : i;
           const doc = {
@@ -63,6 +69,18 @@ export default new Vuex.Store({
           });
           const mergeObj = {...doc, ...srcObj[0]};
           response.push(mergeObj);
+        }
+
+        // Fill days til sunday
+        for (i = firstDay; i > 0; i--) {
+          const d = (i === firstDay)? prevMonthLastDay: prevMonthLastDay - index;
+          const doc = {
+            clockIn: [],
+            clockOut: [],
+            "date": `${lastMonth}-${d}`,
+          };
+          index++;
+          response.unshift(doc);
         }
 
         commit(types.SET_DAYS, response);
