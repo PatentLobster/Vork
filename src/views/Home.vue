@@ -6,7 +6,7 @@
             No records found.
         </div>
         <div v-else class="list-wrapper">
-                <list-item v-for="date in days" :lists="date" :key="date.date" />
+                <list-item v-for="date in days" :lists="date" :key="date.date.slice(8).int" />
         </div>
         <button v-on:click="getRows">Reload</button>
         <Countdown/>
@@ -41,6 +41,7 @@
         created() {
             console.log(this.currentMonth);
             this.FETCH_DAYS(this.currentMonth);
+
         },
     }
 </script>
