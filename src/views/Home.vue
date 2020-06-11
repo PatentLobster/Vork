@@ -6,7 +6,32 @@
             No records found.
         </div>
         <div v-else class="list-wrapper">
+            <ol>
+                <li>
+                    Sunday
+                </li>
+                <li>
+                    Monday
+                </li>
+                <li>
+                    Tuesday
+                </li>
+                <li>
+                    Wednesday
+                </li>
+                <li>
+                    Thursday
+                </li>
+                <li>
+                    Friday
+                </li>
+                <li>
+                    Saturday
+                </li>
+            </ol>
+            <ol class="days">
                 <list-item v-for="date in days" :lists="date" :key="date.date.slice(8).int" />
+            </ol>
         </div>
         <button v-on:click="getRows">Reload</button>
         <Countdown/>
@@ -31,18 +56,22 @@
             ]),
         },
         methods: {
-            getRows() {
-                this.FETCH_DAYS(this.currentMonth);
+            clog(e) {
+                console.log(e);
             },
-            ...mapActions([
+            getRows() {
+           this.FETCH_DAYS(this.currentMonth);
+         },
+         ...mapActions([
                 types.FETCH_DAYS,
-            ]),
+         ]),
         },
         created() {
             console.log(this.currentMonth);
             this.FETCH_DAYS(this.currentMonth);
 
         },
+
     }
 </script>
 

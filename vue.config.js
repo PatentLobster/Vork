@@ -5,7 +5,9 @@ module.exports = {
     electronBuilder: {
       externals: ['nedb'],
       nodeIntegration: true,
-      enableRemoteModule: true
+      enableRemoteModule: true,
+      width: 650,
+      height: 650
     }
   }
 }

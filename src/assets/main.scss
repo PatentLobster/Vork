@@ -101,42 +101,41 @@ select {
 // END OF RESET CSS
 
 
-.list-wrapper{
-  //display: grid;
-  grid-gap: 20px;
-  grid-template-columns: repeat(auto-fit, minmax(255px, 1fr));
-  justify-items: center;
+//.list-wrapper{
+//  //display: grid;
+//  grid-gap: 20px;
+//  grid-template-columns: repeat(auto-fit, minmax(255px, 1fr));
+//  justify-items: center;
+//
+//  justify-content: center;
+//  padding: 0;
+//  margin: 0;
+//}
 
-  justify-content: center;
-  padding: 0;
-  margin: 0;
-}
-
-.home-day {
-  display: inline-block;
-  //width: 250px;
-  //height: 250px;
-  margin: 1rem;
-  padding: 0rem;
-  //clip-path: circle(19% at 50% 62%);
-  //transition: clip-path 2s ease-in-out;
-}
+//.home-day {
+//  //display: inline-block;
+//  ////width: 250px;
+//  ////height: 250px;
+//  //margin: 1rem;
+//  //padding: 0rem;
+//  //clip-path: circle(19% at 50% 62%);
+//  //transition: clip-path 2s ease-in-out;
+//}
 
 .home-day.active{
   overflow-y: overlay;
-  clip-path: circle(90%);
-
+  //clip-path: circle(90%);
 }
 
-.home-day
-.cal-mode {
-  position: relative;
-  //top: 125px;
-  text-align: center;
-  transition-property: position, top;
-  transition-duration: 1.3s;
-  transition-timing-function: ease-in-out;
-}
+//.home-day
+//.cal-mode {
+//  position: relative;
+//  //top: 125px;
+//  text-align: center;
+//  transition-property: position, top;
+//  transition-duration: 1.3s;
+//  transition-timing-function: ease-in-out;
+//}
 
 .home-day.active
 .cal-mode {
@@ -216,3 +215,37 @@ select {
 //.co-11{
 // background-color:var(--11);
 //}
+
+  // List styling
+  //ol {
+  //  list-style: none;
+  //  margin: 0;
+  //  padding:0;
+  //  display: flex;
+  //  flex-direction: row;
+  //  flex-wrap: wrap;
+  //  li {
+  //    width: calc(100% / 7);
+  //    padding: 1rem;
+  //    background: linear-gradient(-145deg, transparent, hsla(0, 0%, 0%,0.025));
+  //  }
+  //}
+
+  ol {
+    list-style: none;
+    margin: 0;
+    padding:0;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    li {
+      width: calc(100% / 7);
+      padding: 1rem;
+      background: linear-gradient(-145deg, transparent, hsla(0, 0%, 0%,0.025));
+    }
+    .home-day{
+      width: calc(100% / 7);
+      margin-bottom: 0.4rem;
+    }
+}
+

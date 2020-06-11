@@ -12,7 +12,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
       days: [],
-      today: [],
+      today: "",
       firstLogin: "",
       dailyGoal: "",
   },
@@ -96,16 +96,12 @@ export default new Vuex.Store({
         commit(types.SET_CURRENT,  [firstLoginObj.format("HH:mm:ss"), firstLoginObj.add(9,"hours").format("HH:mm:ss")]);
       });
     },
-    [types.FETCH_CURRENT]({commit}) {
-      db.find({}, (err, result) => {
-        commit(types.SET_DAYS, result);
-        const today = moment(new Date(), "YYYY-MM-DD").format("YYYY-MM-DD");
+    [types.FETCH_CURRENT]({commit}, request) {
+      db.find({date: request}, (err, result) => {
+        commit(types.SET, result[0]);
+        // const today = moment(new Date(), "YYYY-MM-DD").format("YYYY-MM-DD");
         // console.log(this.firstLogin);
         // console.log("days", this.days);
-        let todayObj = this.days.filter(obj => {
-          return obj.date == today;
-        });
-        commit(types.SET_CURRENT,  todayObj[0].clockIn[0]);
       });
     },
 
