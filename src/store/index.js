@@ -12,7 +12,11 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
       days: [],
-      today: "",
+      today: {
+              clockIn: [],
+              clockOut: [],
+              "date": `2020-02-02`,
+            },
       firstLogin: "",
       dailyGoal: "",
   },
@@ -21,7 +25,7 @@ export default new Vuex.Store({
       state.days.push(payload);
     },
     [types.SET](state, payload) {
-      state.today =payload;
+      state.today = payload;
     },
     [types.SET_DAYS](state, payload) {
       state.days = payload;
@@ -98,7 +102,16 @@ export default new Vuex.Store({
     },
     [types.FETCH_CURRENT]({commit}, request) {
       db.find({date: request}, (err, result) => {
-        commit(types.SET, result[0]);
+        if (err || !result[0]) {
+          const doc = {
+            clockIn: [],
+            clockOut: [],
+            "date": `${request}`,
+          };
+          commit(types.SET, doc);
+        } else  {
+          commit(types.SET, result[0]);
+        }
         // const today = moment(new Date(), "YYYY-MM-DD").format("YYYY-MM-DD");
         // console.log(this.firstLogin);
         // console.log("days", this.days);

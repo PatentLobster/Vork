@@ -4,15 +4,15 @@
     <h1>
          {{ $route.params.date }}
         <h4>{{CurrentHumanDay}}</h4>
-        {{firstLogin}}
+        <h5 v-if="firstLogin" >First login <span v-text="firstLogin"></span></h5>
      </h1>
-        <div class="got-in region">
+        <div class="got-in region" v-if="clockIns[0]">
             <h4>Clocked In:</h4>
             <li v-for="(hour, i) in clockIns" :key="i" >
                 {{hour}}
             </li>
         </div>
-        <div class="got-out region">
+        <div class="got-out region" v-if="clockOuts[0]">
             <h4>Clocked Out:</h4>
             <li v-for="(hour, i) in clockOuts" :key="i" >
                 {{hour}}
@@ -44,13 +44,13 @@
                 return moment(this.$route.params.date).format("dddd");
             },
             firstLogin() {
-                return this.today.clockIn[0];
+                return (this.today.clockIn[0])? this.today.clockIn[0] : null;
             },
             clockIns() {
-                return this.today.clockIn;
+                return (this.today.clockIn)? this.today.clockIn : [];
             },
             clockOuts() {
-                return this.today.clockOut;
+                return (this.today.clockOut)? this.today.clockOut : [];
             }
         },
         methods: {
@@ -93,9 +93,10 @@
         },
         created() {
             this.FETCH_CURRENT(this.$route.params.date);
-            this.resetState();
+            // this.resetState();
             console.log(this.today);
-        }
+        },
+
     }
 </script>
 
