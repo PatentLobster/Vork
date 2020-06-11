@@ -1,10 +1,10 @@
 'use strict';
 
-import {app, protocol, BrowserWindow, powerMonitor} from 'electron'
+import {app, protocol, BrowserWindow, powerMonitor, Tray, Menu} from 'electron'
 // import db from "datastore";
 import db from "@/datastore";
 import moment from "moment";
-
+import path from "path";
 const globalAny = global;
 globalAny.db = db;
 db.ensureIndex({fieldName: 'date', unique: true}, function (err) {
@@ -21,6 +21,58 @@ const isDevelopment = process.env.NODE_ENV !== 'production';
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let win;
+let tray;
+
+const createTray = () => {
+    tray = new Tray(path.join(__static,"/icon.png"));
+    const contextMenu = Menu.buildFromTemplate([
+        { label: "Open Developer tools", click() {
+                if( win !== null || win !== undefined) {
+                    win.webContents.openDevTools();
+                }
+            }},
+        { label: 'Exit', click() {
+                app.quit()
+            }}
+    ]);
+    tray.setToolTip("Work-io is running");
+    tray.setContextMenu(contextMenu);
+    tray.on('click', function (event) {
+        toggleWindow();
+    })
+};
+
+const toggleWindow = () => {
+    if(win === null){
+        createWindow()
+    } else {
+        if (win.isVisible()) {
+            win.hide();
+            win = null;
+        } else {
+            showWindow();
+        }
+    }
+};
+const showWindow = () => {
+    // createWindow()
+    win.loadFile('src/index.html');
+    const position = getWindowPosition();
+    // win.reload();
+    win.show();
+    win.setPosition(position.x, position.y, true);
+    console.log(win.getPosition())
+};
+
+const getWindowPosition = () => {
+    const windowBounds = win.getBounds();
+    const trayBounds = tray.getBounds();
+    const x =  Math.round(trayBounds.x - (windowBounds.width / 2.333));
+    const y = trayBounds.y - windowBounds.height ;
+    return {x: x, y: y}
+};
+
+
 
 // Scheme must be registered before the app is ready
 protocol.registerSchemesAsPrivileged([{scheme: 'app', privileges: {secure: true, standard: true}}]);
@@ -34,13 +86,16 @@ function createWindow() {
         frame: false,
         alwaysOnTop: true,
         transparent: true,
+        fullscreenable: false,
+        skipTaskbar: true,
         webPreferences: {
             // Use pluginOptions.nodeIntegration, leave this alone
             // See nklayman.github.io/vue-cli-plugin-electron-builder/guide/security.html#node-integration for more info
             nodeIntegration: process.env.ELECTRON_NODE_INTEGRATION
         }
     });
-
+    const position = getWindowPosition();
+    win.setPosition(position.x, position.y, true);
     if (process.env.WEBPACK_DEV_SERVER_URL) {
         // Load the url of the dev server if in development mode
         win.loadURL(process.env.WEBPACK_DEV_SERVER_URL)
@@ -99,7 +154,8 @@ app.on('ready', async () => {
         }
 
     }
-    createWindow()
+    createTray();
+    createWindow();
 });
 
 // Exit cleanly on request from parent process in development mode.
