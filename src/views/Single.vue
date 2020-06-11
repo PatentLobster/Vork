@@ -1,12 +1,16 @@
 <template>
-    <div>
-        <router-link to="/">home</router-link>
-    <h1>
-         {{ CurrentHumanDate }}
-        <h4>{{CurrentHumanDay}}</h4>
-        <h5 v-if="firstLogin" class="details">First login <span v-text="firstLogin"></span></h5>
-        <h5 v-if="lastLogout" class="details">Last logout <span v-text="lastLogout"></span></h5>
-     </h1>
+    <div class="single">
+    <div class="today-box">
+        <p class="date-title"> {{ CurrentHumanDate }} </p>
+        <h2 class="date-title"> {{CurrentHumanDay}}    </h2>
+        <div class="daily-target">
+            <span v-if="firstLogin" class="details">First login: {{firstLogin}}</span>
+            <span v-if="lastLogout" class="details">Last logout: {{lastLogout}}</span>
+            <span v-if="lastLogout" class="details">Last logout: {{lastLogout}}</span>
+        </div>
+     </div>
+     <router-link to="/" class="go-back">Back</router-link>
+        <div class="list-wrapper detail-view">
         <div class="got-in region" v-if="clockIns[0]">
             <h4>Clocked In:</h4>
             <li v-for="(hour, i) in clockIns" :key="i" >
@@ -18,6 +22,7 @@
             <li v-for="(hour, i) in clockOuts" :key="i" >
                 {{hour}}
             </li>
+        </div>
         </div>
     </div>
 </template>

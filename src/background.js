@@ -25,7 +25,14 @@ protocol.registerSchemesAsPrivileged([{scheme: 'app', privileges: { secure: true
 
 function createWindow () {
   // Create the browser window.
-  win = new BrowserWindow({ width: 450, height: 350, webPreferences: {
+  win = new BrowserWindow({
+    width: 450,
+    height: 300,
+    show: true,
+    frame: false,
+    alwaysOnTop: true,
+    transparent: true,
+    webPreferences: {
     // Use pluginOptions.nodeIntegration, leave this alone
     // See nklayman.github.io/vue-cli-plugin-electron-builder/guide/security.html#node-integration for more info
     nodeIntegration: process.env.ELECTRON_NODE_INTEGRATION
