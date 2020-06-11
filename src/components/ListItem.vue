@@ -1,14 +1,14 @@
 <template>
 <div  class="home-day" :class="[showingHours ? 'active' : '' , ClassObj]">
         <div class="date">
-            <h2  v-if="lists._id">
+            <span  v-if="lists._id">
                 <router-link :to="`/show/${lists.date}`">
                     {{CurrentDay}}
                 </router-link>
-            </h2>
-            <h2 v-else>
+            </span>
+            <span v-else>
                 {{CurrentDay}}
-            </h2>
+            </span>
         </div>
 </div>
 </template>

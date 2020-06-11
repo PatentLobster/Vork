@@ -238,14 +238,141 @@ select {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    text-align: center;
+    font-size: 15px;
     li {
       width: calc(100% / 7);
-      padding: 1rem;
+      padding: 0.5rem;
+      //padding-right: 10px;
+      //padding-bottom: 0.5rem;
+      //margin-right: 3px;
+      //margin: 1px;
       background: linear-gradient(-145deg, transparent, hsla(0, 0%, 0%,0.025));
     }
     .home-day{
       width: calc(100% / 7);
       margin-bottom: 0.4rem;
     }
+}
+
+  .date{
+    a{
+      text-decoration: none!important;
+    }
+  }
+
+  .days-header{
+    font-size: 13px;
+    margin-right: 4px;
+  }
+
+  .region {
+    display: inline-block;
+    padding: 1rem;
+  }
+
+  .details {
+    //line-height: 0.2rem;
+    padding: 0;
+    margin: 0 auto;
+  }
+
+
+
+.today-box {
+  background: linear-gradient(to left, #485fed, rgba(255, 44, 118, .25)), #485fed;
+  color: #FFF;
+  padding: 15px 22px;
+  position: relative;
+  box-shadow: 0px 0px 40px -9px #485fed;
+  margin-bottom: 21px;
+  &::before {
+    content: "";
+    background: linear-gradient(to left, #485fed, rgba(255, 44, 118, .25)), #485fed;
+    opacity: 0.4;
+    z-index: -1; // CHILD /*negative*/ /* relative with .mobile-wrapper it's his parent background*/
+    display: block;
+    width: 100%;
+    height: 25px;
+    margin: auto;
+    position: absolute;
+    bottom: -13px;
+    left: 50%;
+    transform: translatex(-50%);
+    border-radius: 50%;
+    box-shadow: 0px 0px 40px 0 #485fed;
+  }
+  .breadcrumb {
+    font-weight: 300;
+    position: relative;
+    &::after {
+      content: "\f3d1";
+      font-family: 'Ionicons';
+      vertical-align: middle;
+      font-size: 12px;
+      font-weight: 100;
+      display: inline-block;
+      color: #fff;
+      text-align: center;
+      position: absolute;
+      left: 45px;
+      top: 3px;
+    }
+  }
+  .date-title {
+    //font-size: 20px;
+    margin: 7px 0 0 0;
+    letter-spacing: 1px;
+    font-weight: 600;
+    text-shadow: 0px 0px 5px  rgba(#000, 0.15);
+    text-align: left;
+
+  }
+  .reload-btn {
+    border: 2px solid rgba(#FFF, 0.6);
+    border-radius: 10%;
+    box-shadow: 0px 10px 30px -14px #000;
+    position: absolute;
+    display: none;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 40px;
+    cursor: pointer;
+    transition: all 350ms ease;
+    transition-timing-function: cubic-bezier(0.05,1.8,1,1.57);
+    &:hover {
+      transform: translateY(-40%);
+    }
+    i {
+      font-size: 22px;
+      font-weight: 700;
+      background: #fff;
+      color: #777;
+      width: 45px;
+      height: 45px;
+      border: 6px solid #485fed;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    &:active {
+      top: 52%;
+      transform: translatey(-52%);
+      right: 38px;
+      box-shadow: 0px 8px 30px -14px #000;
+    }
+  }
+  .daily-target {
+    position: absolute;
+    display: inline-block;
+    //top: 50%;
+    top: 5px;
+    right: 5px;
+    span{
+      text-align: right;
+      display: block;
+    }
+  }
 }
 

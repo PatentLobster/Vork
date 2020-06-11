@@ -1,6 +1,8 @@
 <template>
-    <div v-if="timeLeft" class="counter">
-        Countdown {{ timeLeft }}
+    <div v-if="timeLeft" class="daily-target">
+        <span>First Login: {{firstLogin}}</span>
+        <span>Time left: {{ timeLeft }}</span>
+        <span>Goal: {{dailyGoal}}</span>
     </div>
 </template>
 

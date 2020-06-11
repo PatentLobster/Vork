@@ -1,40 +1,41 @@
 <template>
     <div>
-        <h1>{{currentMonth.slice(0, 4)}}</h1>
-        <h2>{{currentHumanMonth}}</h2>
+        <div class="today-box">
+            <h1 class="date-title">{{currentMonth.slice(0, 4)}} - {{currentHumanMonth}} </h1>
+            <button v-on:click="getRows" class="reload-btn">Reload</button>
+            <Countdown/>
+        </div>
         <div v-if="days.length === 0">
             No records found.
         </div>
         <div v-else class="list-wrapper">
-            <ol>
+            <ol class="days-header">
                 <li>
-                    Sunday
+                    Sun
                 </li>
                 <li>
-                    Monday
+                    Mon
                 </li>
                 <li>
-                    Tuesday
+                    Tue
                 </li>
                 <li>
-                    Wednesday
+                    Wed
                 </li>
                 <li>
-                    Thursday
+                    Thu
                 </li>
                 <li>
-                    Friday
+                    Fri
                 </li>
                 <li>
-                    Saturday
+                    Sat
                 </li>
             </ol>
             <ol class="days">
                 <list-item v-for="date in days" :lists="date" :key="date.date.slice(8).int" />
             </ol>
         </div>
-        <button v-on:click="getRows">Reload</button>
-        <Countdown/>
     </div>
 </template>
 
