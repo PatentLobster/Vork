@@ -305,8 +305,10 @@ ol {
   .daily-target {
     position: absolute;
     display: inline-block;
+    font-size: 13px;
+    font-family: Avenir, Helvetica, Arial, sans-serif;
     //top: 50%;
-    top: 5px;
+    top: 10px;
     //padding-bottom: 5px;
     right: 5px;
 
