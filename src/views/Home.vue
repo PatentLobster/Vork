@@ -1,7 +1,8 @@
 <template>
     <div>
         <div class="today-box">
-            <h1 class="date-title">{{currentMonth.slice(0, 4)}} - {{currentHumanMonth}} </h1>
+            <p class="date-title">{{currentMonth.slice(0, 4)}} </p>
+            <h2 class="date-title">{{currentHumanMonth}} </h2>
             <button v-on:click="getRows" class="reload-btn">Reload</button>
             <Countdown/>
         </div>
