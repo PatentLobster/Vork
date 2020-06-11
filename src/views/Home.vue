@@ -33,25 +33,30 @@
                 </li>
             </ol>
             <ol class="days">
-                <list-item v-for="date in days" :lists="date" :key="date.date.slice(8).int" />
+                <list-item v-for="date in days" :lists="date" :key="date.date.slice(8).int"/>
             </ol>
         </div>
     </div>
 </template>
 
 <script>
-    import { mapActions, mapState } from 'vuex';
+    import {mapActions, mapState} from 'vuex';
     import moment from 'moment';
     import types from '../store/types';
     import ListItem from "@/components/ListItem";
     import Countdown from "@/components/Countdown";
+
     const dateObj = new Date();
     export default {
         name: "Home",
         components: {Countdown, ListItem},
         computed: {
-            currentMonth: () => {return moment(dateObj, "YYYY-MM-DD").format("YYYY-MM");},
-            currentHumanMonth: () => {return moment(dateObj, "YYYY-MM-DD").format("MMMM");},
+            currentMonth: () => {
+                return moment(dateObj, "YYYY-MM-DD").format("YYYY-MM");
+            },
+            currentHumanMonth: () => {
+                return moment(dateObj, "YYYY-MM-DD").format("MMMM");
+            },
             ...mapState([
                 'days',
             ]),
@@ -61,11 +66,11 @@
                 console.log(e);
             },
             getRows() {
-           this.FETCH_DAYS(this.currentMonth);
-         },
-         ...mapActions([
+                this.FETCH_DAYS(this.currentMonth);
+            },
+            ...mapActions([
                 types.FETCH_DAYS,
-         ]),
+            ]),
         },
         created() {
             console.log(this.currentMonth);

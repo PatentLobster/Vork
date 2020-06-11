@@ -1,8 +1,7 @@
 /* Box sizing rules */
 *,
 *::before,
-*::after
-{
+*::after {
   box-sizing: border-box;
 }
 
@@ -100,42 +99,10 @@ select {
 
 // END OF RESET CSS
 
-
-//.list-wrapper{
-//  //display: grid;
-//  grid-gap: 20px;
-//  grid-template-columns: repeat(auto-fit, minmax(255px, 1fr));
-//  justify-items: center;
-//
-//  justify-content: center;
-//  padding: 0;
-//  margin: 0;
-//}
-
-//.home-day {
-//  //display: inline-block;
-//  ////width: 250px;
-//  ////height: 250px;
-//  //margin: 1rem;
-//  //padding: 0rem;
-//  //clip-path: circle(19% at 50% 62%);
-//  //transition: clip-path 2s ease-in-out;
-//}
-
-.home-day.active{
+.home-day.active {
   overflow-y: overlay;
-  //clip-path: circle(90%);
 }
 
-//.home-day
-//.cal-mode {
-//  position: relative;
-//  //top: 125px;
-//  text-align: center;
-//  transition-property: position, top;
-//  transition-duration: 1.3s;
-//  transition-timing-function: ease-in-out;
-//}
 
 .home-day.active
 .cal-mode {
@@ -143,16 +110,16 @@ select {
   text-align: center;
 }
 
-.active .showing{
+.active .showing {
   //display: inline-block;
   opacity: 100;
   display: block;
 }
 
-.showing{
+.showing {
   opacity: 0;
   display: none;
-  transition: opacity  2s ease-in 3s,opacity 2s ease-out 0.2s!important;
+  transition: opacity 2s ease-in 3s, opacity 2s ease-out 0.2s !important;
 }
 
 .counter {
@@ -182,59 +149,61 @@ select {
 }
 
 
-  ol {
+ol {
 
-    list-style: none;
-    margin: 0;
-    padding:0;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    text-align: center;
-    font-size: 15px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  text-align: center;
+  font-size: 15px;
 
-    li {
-      width: calc(100% / 7);
-      padding: 0.5rem;
-      //padding-right: 10px;
-      //padding-bottom: 0.5rem;
-      //margin-right: 3px;
-      //margin: 1px;
-      background: linear-gradient(-145deg, transparent, hsla(0, 0%, 0%,0.025));
+  li {
+    width: calc(100% / 7);
+    padding: 0.5rem;
+    //padding-right: 10px;
+    //padding-bottom: 0.5rem;
+    //margin-right: 3px;
+    //margin: 1px;
+    background: linear-gradient(-145deg, transparent, hsla(0, 0%, 0%, 0.025));
 
-    }
-    .home-day{
-      width: calc(100% / 7);
-      margin-bottom: 0.4rem;
-    }
-    &.days-header{
-      font-size: 13px;
-      box-shadow: 0px -1px 5px #282c33;
-      border-bottom: 2px solid #464a52;
-    }
-    &.days {
-      margin-top: 5px;
-    }
+  }
+
+  .home-day {
+    width: calc(100% / 7);
+    margin-bottom: 0.4rem;
+  }
+
+  &.days-header {
+    font-size: 13px;
+    box-shadow: 0px -1px 5px #282c33;
+    border-bottom: 2px solid #464a52;
+  }
+
+  &.days {
+    margin-top: 5px;
+  }
 }
 
-  .date{
-    a{
-      text-decoration: none!important;
-    }
+.date {
+  a {
+    text-decoration: none !important;
   }
+}
 
 
-  .region {
-    display: inline-block;
-    padding: 1rem;
-  }
+.region {
+  display: inline-block;
+  padding: 1rem;
+}
 
-  .details {
-    //line-height: 0.2rem;
-    padding: 0;
-    margin: 0 auto;
-  }
-
+.details {
+  //line-height: 0.2rem;
+  padding: 0;
+  margin: 0 auto;
+}
 
 
 .today-box {
@@ -263,9 +232,11 @@ select {
     border-radius: 50%;
     box-shadow: 0px 0px 40px 0 #485fed;
   }
+
   .breadcrumb {
     font-weight: 300;
     position: relative;
+
     &::after {
       content: "\f3d1";
       font-family: 'Ionicons';
@@ -280,16 +251,18 @@ select {
       top: 3px;
     }
   }
+
   .date-title {
     //font-size: 20px;
     margin: 7px 0 0 0;
     line-height: normal;
     letter-spacing: 1px;
     font-weight: 600;
-    text-shadow: 0px 0px 5px  rgba(#000, 0.15);
+    text-shadow: 0px 0px 5px rgba(#000, 0.15);
     text-align: left;
 
   }
+
   .reload-btn {
     border: 2px solid rgba(#FFF, 0.6);
     border-radius: 10%;
@@ -301,10 +274,12 @@ select {
     right: 40px;
     cursor: pointer;
     transition: all 350ms ease;
-    transition-timing-function: cubic-bezier(0.05,1.8,1,1.57);
+    transition-timing-function: cubic-bezier(0.05, 1.8, 1, 1.57);
+
     &:hover {
       transform: translateY(-40%);
     }
+
     i {
       font-size: 22px;
       font-weight: 700;
@@ -318,6 +293,7 @@ select {
       align-items: center;
       justify-content: center;
     }
+
     &:active {
       top: 52%;
       transform: translatey(-52%);
@@ -325,6 +301,7 @@ select {
       box-shadow: 0px 8px 30px -14px #000;
     }
   }
+
   .daily-target {
     position: absolute;
     display: inline-block;
@@ -332,7 +309,8 @@ select {
     top: 5px;
     //padding-bottom: 5px;
     right: 5px;
-    span{
+
+    span {
       text-align: right;
       display: block;
     }
@@ -348,7 +326,7 @@ select {
   border-bottom-right-radius: 20px;
   background-color: #131815;
   color: white !important;
-  text-decoration: none!important;
+  text-decoration: none !important;
 
 }
 
@@ -358,6 +336,7 @@ select {
   background-color: #31353D;
   color: white;
   height: 150px;
+
   a {
     color: gold;
   }
@@ -371,17 +350,13 @@ select {
 .single {
   .today-box {
     padding: 18px 22px !important;
+
     .date-title {
       margin: 2px 0 0 0;
     }
   }
 }
-//
-//html {
-//  box-sizing: border-box;
-//}
-//
-//
+
 body {
   background-color: #31353D;
 }

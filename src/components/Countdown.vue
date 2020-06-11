@@ -8,7 +8,8 @@
 
 <script>
     const moment = require('moment');
-    import  { mapState } from 'vuex';
+    import {mapState} from 'vuex';
+
     export default {
         name: "Countdown",
         props: ['since'],
@@ -29,7 +30,7 @@
                 const goal = moment(this.firstLogin, "HH:mm:ss").add(hoursToGo, "hours");
                 const now = moment(new Date(), "HH:mm:ss");
                 const offset = goal.diff(now);
-                this.timeLeft =  moment.utc(offset).format("HH:mm:ss");
+                this.timeLeft = moment.utc(offset).format("HH:mm:ss");
                 if (offset > 0)
                     setTimeout(this.updateClock, 1000);
             }

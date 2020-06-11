@@ -1,7 +1,7 @@
 <template>
-<div  class="home-day" :class="[showingHours ? 'active' : '' , ClassObj]">
+    <div class="home-day" :class="[showingHours ? 'active' : '' , ClassObj]">
         <div class="date">
-            <span  v-if="lists._id">
+            <span v-if="lists._id">
                 <router-link :to="`/show/${lists.date}`">
                     {{CurrentDay}}
                 </router-link>
@@ -10,7 +10,7 @@
                 {{CurrentDay}}
             </span>
         </div>
-</div>
+    </div>
 </template>
 
 <script>
@@ -29,19 +29,19 @@
             }
         },
         computed: {
-          CurrentDay() {
-              return moment(this.lists.date).format("DD");
-          },
-          CurrentHumanDay() {
-              return moment(this.lists.date).format("dddd");
-          },
-          ClassObj() {
-              return "co-" + Math.floor(Math.floor(Math.random() * 10)% 11 + 1);
-          }
+            CurrentDay() {
+                return moment(this.lists.date).format("DD");
+            },
+            CurrentHumanDay() {
+                return moment(this.lists.date).format("dddd");
+            },
+            ClassObj() {
+                return "co-" + Math.floor(Math.floor(Math.random() * 10) % 11 + 1);
+            }
         },
         methods: {
             showHours() {
-              this.showingHours = !this.showingHours;
+                this.showingHours = !this.showingHours;
             },
             resetState() {
                 this.hours = [];
@@ -75,18 +75,15 @@
         },
         created() {
             this.resetState();
-            this.colorClass = "co-" + Math.floor(Math.floor(Math.random() * 10)% 11 + 1) ;
+            this.colorClass = "co-" + Math.floor(Math.floor(Math.random() * 10) % 11 + 1);
         },
         watch: {
-            lists: function (n, o) {if (n !== o) {
-                this.resetState();
-            }}
+            lists: function (n, o) {
+                if (n !== o) {
+                    this.resetState();
+                }
+            }
         }
-        // updated() {
-        //     this.mounted();
-        // }
-
-
     }
 </script>
 
