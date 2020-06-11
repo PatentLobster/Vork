@@ -35,7 +35,7 @@ const createTray = () => {
                 app.quit()
             }}
     ]);
-    tray.setToolTip("Work-io is running");
+    tray.setToolTip("Vork is running");
     tray.setContextMenu(contextMenu);
     tray.on('click', function (event) {
         toggleWindow();

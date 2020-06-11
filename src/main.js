@@ -6,7 +6,7 @@ import Home from "@/views/Home";
 import Single from "@/views/Single";
 
 require('@/assets/main.scss');
-
+require('animate.css');
 Vue.config.productionTip = false;
 
 Vue.use(VueRouter);

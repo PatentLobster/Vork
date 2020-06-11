@@ -1,8 +1,8 @@
 <template>
   <div id="app">
-      <router-view>
-
-      </router-view>
+      <transition name="flip">
+        <router-view />
+      </transition>
   </div>
 </template>
 
@@ -11,7 +11,6 @@
 
 export default {
   name: 'App',
-
 }
 </script>
 

@@ -195,8 +195,11 @@ ol {
 
 
 .region {
-  display: inline-block;
-  padding: 1rem;
+    display: inline-grid;
+    margin: 0 auto;
+    padding-left: 1.5rem;
+    position: relative;
+    top: 20px;
 }
 
 .details {
@@ -253,10 +256,7 @@ ol {
   }
 
   .date-title {
-    //font-size: 20px;
-    //margin: 7px 0 0 0;
     margin: 2px 0 0 0;
-
     line-height: normal;
     letter-spacing: 1px;
     font-weight: 600;
@@ -363,5 +363,22 @@ ol {
 
 body {
   //background-color: #31353D;
+  overflow: hidden;
+  animation: bounceInUp;
+  animation-duration: 0.8s;
 }
 
+.flip-enter-active{
+  /*transition: opacity .5s;*/
+  transition-delay: 0.4s;
+  /*transition-timing-function: flip;*/
+  animation: flipInX;
+  animation-duration: 0.8s;
+}
+.flip-leave-active {
+  /*transition: opacity .5s;*/
+  transition-delay: 0.5s;
+  /*transition-timing-function: flip;*/
+  animation: bounceOutUp;
+  animation-duration: 0.5s;
+}
