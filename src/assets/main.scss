@@ -344,6 +344,16 @@ ol {
   a {
     color: gold;
   }
+
+  .today {
+    background: linear-gradient(to left, #485fed, rgba(255, 44, 118, .25)), #485fed;
+    color: black;
+    padding-right: 0.1rem;
+    clip-path: circle(29%);
+    a {
+      color: white;
+    }
+  }
 }
 
 .detail-view {

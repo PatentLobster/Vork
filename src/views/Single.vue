@@ -6,7 +6,7 @@
             <div class="daily-target">
                 <span v-if="firstLogin" class="details">First login: {{firstLogin}}</span>
                 <span v-if="lastLogout" class="details">Last logout: {{lastLogout}}</span>
-                <span v-if="lastLogout" class="details">Last logout: {{lastLogout}}</span>
+                <span v-if="lastLogout" class="details">Total: {{totalHours}}</span>
             </div>
         </div>
         <router-link to="/" class="go-back">Back</router-link>
@@ -55,6 +55,9 @@
             },
             lastLogout() {
                 return (this.today.clockOut[this.today.clockOut.length - 1]) ? this.today.clockOut[this.today.clockOut.length - 1] : null;
+            },
+            totalHours() {
+                return moment.utc(moment(this.lastLogout, "HH:mm:ss").diff(moment(this.firstLogin, "HH:mm:ss"))).format("HH:mm:ss");
             },
             clockIns() {
                 return (this.today.clockIn) ? this.today.clockIn : [];
