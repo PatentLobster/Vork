@@ -211,6 +211,7 @@ app.on('ready', async () => {
         }
 
     }
+    log_in();
     createTray();
     createWindow();
 });
