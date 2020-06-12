@@ -113,7 +113,7 @@ const toggleWindow = () => {
 };
 const showWindow = () => {
     // createWindow()
-    win.loadFile('src/index.html');
+    win.loadFile('app://./index.html');
     const position = getWindowPosition();
     // win.reload();
     win.show();
