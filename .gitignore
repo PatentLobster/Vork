@@ -21,7 +21,7 @@ pnpm-debug.log*
 *.sln
 *.sw?
 *.db
-
 #Electron-builder output
+/build
 /dist_electron
 *.lock

@@ -1,7 +1,10 @@
 'use strict';
+/* global __static */
+import {app, protocol, BrowserWindow, powerMonitor, Tray, Menu, Notification} from 'electron'
+const axios = require('axios');
 
-import {app, protocol, BrowserWindow, powerMonitor, Tray, Menu} from 'electron'
-// import db from "datastore";
+
+// App logic
 import db from "@/datastore";
 import moment from "moment";
 import path from "path";
@@ -10,6 +13,60 @@ globalAny.db = db;
 db.ensureIndex({fieldName: 'date', unique: true}, function (err) {
     // console.log(err);
 });
+
+function log_in() {
+    let datetime = new Date();
+    const t = moment(datetime);
+    const today = t.format("YYYY-MM-DD");
+    const now = t.format("HH:mm:ss");
+    const doc = {
+        "date": today,
+        "clockIn": [now],
+        "clockOut": []
+    };
+
+    db.update({"date": today}, {$push: {"clockIn": now}}, {}, function (err, result) {
+        console.log(err, result);
+        if (result === 0) {
+            db.insert(doc);
+        }
+    });
+}
+
+function log_out() {
+    let datetime = new Date();
+    const t = moment(datetime);
+    const today = t.format("YYYY-MM-DD");
+    const now = t.format("HH:mm:ss");
+    const doc = {
+        "date": today,
+        "clockIn": [],
+        "clockOut": [now]
+    };
+    db.update({"date": today}, {$push: {"clockOut": now}}, {}, function (err, result) {
+        // db.findOne({date: today}, function (err, doc) {
+        console.log(err, result);
+        if (result === 0) {
+            db.insert(doc);
+        }
+    });
+}
+
+function greet() {
+    axios.get("https://favqs.com/api/qotd").then((response) => {
+        const quotes = response.data.quote.body;
+        const author = response.data.quote.author;
+        const arr = {'title': author, 'body': quotes, 'icon': path.join(__static,"/icon.png")};
+        console.log(arr);
+        return arr;
+    }).then((arr) => callNotification(arr) );
+}
+
+function callNotification(notif){
+    new Notification(notif).show();
+}
+
+// End of App logic.
 
 import {
     createProtocol,
@@ -68,10 +125,9 @@ const getWindowPosition = () => {
     const windowBounds = win.getBounds();
     const trayBounds = tray.getBounds();
     const x =  Math.round(trayBounds.x - (windowBounds.width / 2.333));
-    const y = trayBounds.y - windowBounds.height ;
+    const y = trayBounds.y - windowBounds.height + 5;
     return {x: x, y: y}
 };
-
 
 
 // Scheme must be registered before the app is ready
@@ -88,6 +144,7 @@ function createWindow() {
         transparent: true,
         fullscreenable: false,
         skipTaskbar: true,
+        icon: path.join(__static, 'icon.png'),
         webPreferences: {
             // Use pluginOptions.nodeIntegration, leave this alone
             // See nklayman.github.io/vue-cli-plugin-electron-builder/guide/security.html#node-integration for more info
@@ -134,7 +191,7 @@ app.on('activate', () => {
 app.on('ready', async () => {
     powerMonitor.on('unlock-screen', () => {
         log_in();
-        // greet();
+        greet();
     });
     powerMonitor.on('lock-screen', () => {
         log_out();
@@ -171,47 +228,4 @@ if (isDevelopment) {
             app.quit()
         })
     }
-}
-
-
-function log_in() {
-    let datetime = new Date();
-    const t = moment(datetime);
-    const today = t.format("YYYY-MM-DD");
-    const now = t.format("HH:mm:ss");
-    const doc = {
-        "date": today,
-        "clockIn": [now],
-        "clockOut": []
-    };
-
-    db.update({"date": today}, {$push: {"clockIn": now}}, {}, function (err, result) {
-        // db.findOne({date: today}, function (err, doc) {
-        console.log(err, result);
-        if (result === 0) {
-            db.insert(doc);
-        }
-    });
-}
-
-function log_out() {
-    let datetime = new Date();
-    const t = moment(datetime);
-    const today = t.format("YYYY-MM-DD");
-    const now = t.format("HH:mm:ss");
-    const doc = {
-        "date": today,
-        "clockIn": [],
-        "clockOut": [now]
-    };
-    db.ensureIndex({fieldName: 'date', unique: true}, function (err) {
-        console.log(err);
-    });
-    db.update({"date": today}, {$push: {"clockOut": now}}, {}, function (err, result) {
-        // db.findOne({date: today}, function (err, doc) {
-        console.log(err, result);
-        if (result === 0) {
-            db.insert(doc);
-        }
-    });
 }
