@@ -1,6 +1,8 @@
 'use strict';
 /* global __static */
-import {app, protocol, BrowserWindow, powerMonitor, Tray, Menu, Notification} from 'electron'
+import {app, protocol, BrowserWindow, powerMonitor, Tray, Menu, Notification} from 'electron';
+import {autoUpdater} from 'electron-updater';
+
 const axios = require('axios');
 
 
@@ -8,6 +10,7 @@ const axios = require('axios');
 import db from "@/datastore";
 import moment from "moment";
 import path from "path";
+
 const globalAny = global;
 globalAny.db = db;
 db.ensureIndex({fieldName: 'date', unique: true}, function (err) {
@@ -56,13 +59,13 @@ function greet() {
     axios.get("https://favqs.com/api/qotd").then((response) => {
         const quotes = response.data.quote.body;
         const author = response.data.quote.author;
-        const arr = {'title': author, 'body': quotes, 'icon': path.join(__static,"/icon.png")};
+        const arr = {'title': author, 'body': quotes, 'icon': path.join(__static, "/icon.png")};
         console.log(arr);
         return arr;
-    }).then((arr) => callNotification(arr) );
+    }).then((arr) => callNotification(arr));
 }
 
-function callNotification(notif){
+function callNotification(notif) {
     new Notification(notif).show();
 }
 
@@ -81,16 +84,20 @@ let win;
 let tray;
 
 const createTray = () => {
-    tray = new Tray(path.join(__static,"/icon.png"));
+    tray = new Tray(path.join(__static, "/icon.png"));
     const contextMenu = Menu.buildFromTemplate([
-        { label: "Open Developer tools", click() {
-                if( win !== null || win !== undefined) {
+        {
+            label: "Open Developer tools", click() {
+                if (win === null || win !== undefined) {
                     win.webContents.openDevTools();
                 }
-            }},
-        { label: 'Exit', click() {
+            }
+        },
+        {
+            label: 'Exit', click() {
                 app.quit()
-            }}
+            }
+        }
     ]);
     tray.setToolTip("Vork is running");
     tray.setContextMenu(contextMenu);
@@ -100,7 +107,7 @@ const createTray = () => {
 };
 
 const toggleWindow = () => {
-    if(win === null){
+    if (win === null) {
         createWindow()
     } else {
         if (win.isVisible()) {
@@ -124,7 +131,7 @@ const showWindow = () => {
 const getWindowPosition = () => {
     const windowBounds = win.getBounds();
     const trayBounds = tray.getBounds();
-    const x =  Math.round(trayBounds.x - (windowBounds.width / 2.333));
+    const x = Math.round(trayBounds.x - (windowBounds.width / 2.333));
     const y = trayBounds.y - windowBounds.height + 5;
     return {x: x, y: y}
 };
@@ -160,7 +167,8 @@ function createWindow() {
     } else {
         createProtocol('app');
         // Load the index.html when not in development
-        win.loadURL('app://./index.html')
+        win.loadURL('app://./index.html');
+        autoUpdater.checkForUpdatesAndNotify();
     }
 
     win.on('closed', () => {
