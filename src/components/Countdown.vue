@@ -1,7 +1,7 @@
 <template>
     <div v-if="timeLeft" class="daily-target">
         <span>First Login: {{firstLogin}}</span>
-        <span>Goal: {{dailyGoal}}</span>
+        <span>Goal: {{goal}}</span>
         <span>Time left: {{ timeLeft }}</span>
     </div>
 </template>
@@ -16,19 +16,20 @@
         computed: {
             ...mapState([
                 'firstLogin',
-                'dailyGoal',
                 'settings'
             ]),
         },
         data: () => {
             return {
                 timeLeft: null,
+                goal: "00:04:20",
             }
         },
         methods: {
             updateClock() {
                 let hoursToGo = (this.settings.countDown) ? this.settings.countDown : 9;
                 const goal = moment(this.firstLogin, "HH:mm:ss").add(hoursToGo, "hours");
+                this.goal = goal.format("HH:mm:ss");
                 const now = moment(new Date(), "HH:mm:ss");
                 const offset = goal.diff(now);
                 this.timeLeft = moment.utc(offset).format("HH:mm:ss");

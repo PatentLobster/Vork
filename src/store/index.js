@@ -4,8 +4,7 @@ import Vuex from 'vuex'
 import types from "@/store/types";
 import {remote} from 'electron'
 import settings from 'electron-settings';
-// settings.configure({atomicSave: true});
-// console.log(settings.file());
+
 import moment from 'moment';
 
 const db = remote.getGlobal('db');
@@ -20,7 +19,6 @@ export default new Vuex.Store({
             "date": `2020-02-02`,
         },
         firstLogin: "",
-        dailyGoal: "",
         settings: [],
     },
     mutations: {
@@ -34,8 +32,7 @@ export default new Vuex.Store({
             state.days = payload;
         },
         [types.SET_CURRENT](state, payload) {
-            state.firstLogin = payload[0];
-            state.dailyGoal = payload[1];
+            state.firstLogin = payload;
         },
         [types.FETCH_SETTINGS](state, payload) {
             state.settings = payload;
@@ -43,24 +40,13 @@ export default new Vuex.Store({
     },
     actions: {
         [types.GET_SETTINGS]({commit}) {
-            // db.find({settings: "settings"}, (err, result) => {
-            //     commit(types.FETCH_SETTINGS, result);
-            // });
             const settingsArr = settings.getSync();
             commit(types.FETCH_SETTINGS, settingsArr)
         },
         /* eslint-disable no-unused-vars */
         async [types.SET_SETTINGS]({commit}, k) {
-            console.log("se", k);
             await settings.set(k[0], k[1]);
             commit(types.FETCH_SETTINGS, settings.getSync());
-            // await settings.set({hjo});
-            // settings.set({hours: 8});
-
-            // db.update({settings: "settings"}, { $set: { system: 'solar system' } }, {}, (err, result) => {
-            //     console.log(result);
-            //     commit(types.FETCH_SETTINGS, result);
-            // });
         },
         [types.FETCH_ALL_DAYS]({commit}) {
             db.find({}, (err, result) => {
@@ -122,8 +108,7 @@ export default new Vuex.Store({
                 });
 
                 const firstLoginObj = moment(todayObj[0].clockIn[0], "HH:mm:ss");
-
-                commit(types.SET_CURRENT, [firstLoginObj.format("HH:mm:ss"), firstLoginObj.add(9, "hours").format("HH:mm:ss")]);
+                commit(types.SET_CURRENT, firstLoginObj.format("HH:mm:ss"));
             });
         },
         [types.FETCH_CURRENT]({commit}, request) {
@@ -138,9 +123,6 @@ export default new Vuex.Store({
                 } else {
                     commit(types.SET, result[0]);
                 }
-                // const today = moment(new Date(), "YYYY-MM-DD").format("YYYY-MM-DD");
-                // console.log(this.firstLogin);
-                // console.log("days", this.days);
             });
         },
 

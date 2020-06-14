@@ -77,9 +77,8 @@
             ]),
         },
         created() {
-            console.log(this.currentMonth);
+            this.GET_SETTINGS(true);
             this.FETCH_DAYS(this.currentMonth);
-            this.GET_SETTINGS();
         },
 
     }
