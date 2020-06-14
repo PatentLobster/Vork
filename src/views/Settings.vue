@@ -28,25 +28,8 @@
                 this.GET_SETTINGS();
             },
             updateSettings(e) {
-                // let newObj = this.settings;
-                // newObj.e.target.name = e.target.value;
-                // this.SET_SETTINGS(["sas", "Asdasd"]);
                 this.SET_SETTINGS([e.target.name , e.target.value]);
-                // this.getSettings();
-                // this.SET_SETTINGS({hours: 8});
-                // this.SET_SETTINGS("hours" , e.target.value);
-                // console.log(e);
-                // const skey = e.target.name;
-                // this[skey]  = e.target.value;
-                // // console.log(e.target.value);
-                // let setObj = {};
-                // setObj[skey] = e.target.value;
-                // console.log(setObj);
-                // this.SET_SETTINGS( e.target.name, e.target.value );
-                // this.SET_SETTINGS({hours: 8});
-                // this.getSettings();
             },
-
             ...mapActions([
                 types.FETCH_DAYS,
                 types.GET_SETTINGS,
