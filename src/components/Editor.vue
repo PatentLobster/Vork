@@ -17,7 +17,7 @@ export default {
     },
     theme: {
       type: String,
-      default: ""
+      default: "solarized_dark"
     },
     fontSize: {
       type: Number,
@@ -68,7 +68,9 @@ export default {
   },
   methods: {
     init() {
+
       this.editor = ace.edit(this.$refs.editor);
+
       this.editor.$blockScrolling = Infinity;
       this.session = this.editor.getSession();
       this.$emit("init", this.editor);
@@ -84,14 +86,26 @@ export default {
       this.editor.on("paste", this.onPaste);
       this.editor.on("change", this.onChange);
       this.editor.on("input", this.onInput);
+      this.prettify();
     },
     setMode() {
       require(`brace/mode/${this.lang}`);
       this.session.setMode(`ace/mode/${this.lang}`);
       return this.editor;
     },
+    prettify() {
+      require(`brace/ext/beautify`);
+      // let beautify = ace.acequire("ace/ext/beautify");
+      // b.beautify(this.editor);
+      ace.acequire("ace/ext/beautify");
+      // this.editor.beautify(this.session);
+      // console.log(b);?
+      this.session.beautify();
+      return this.editor;
+    },
     setTheme() {
       require(`brace/theme/${this.theme}`);
+      // this.editor.setTheme(`ace/theme/${this.theme}`);
       this.editor.setTheme(`ace/theme/${this.theme}`);
       return this.editor;
     },

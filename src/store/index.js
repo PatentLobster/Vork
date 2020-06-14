@@ -51,11 +51,6 @@ export default new Vuex.Store({
         [types.FETCH_ALL_DAYS]({commit}) {
             db.find({}, (err, result) => {
                 commit(types.SET_DAYS, result);
-                const today = moment(new Date(), "YYYY-MM-DD").format("YYYY-MM-DD");
-                let todayObj = result.filter(obj => {
-                    return obj.date == today;
-                });
-                commit(types.SET_CURRENT, todayObj[0].clockIn[0]);
             });
         },
         [types.FETCH_DAYS]({commit}, month) {

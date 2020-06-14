@@ -4,9 +4,12 @@
             <h1 class="date-title">Settings</h1>
         </div>
         <router-link to="/" class="go-back">Back</router-link>
-        <div class="list-wrapper detail-view">
-            <label for="countDown"> Hours to count: </label>
+        <div class="list-wrapper settings-view">
+            <div class="settings-form">
+                <label for="countDown"> Hours to count: </label>
                 <input type="number" max="12" min="1" :value="settings.countDown" name="countDown" @change="updateSettings">
+                <div @click="openExport">Export data</div>
+            </div>
         </div>
 
     </div>
@@ -29,6 +32,9 @@
             },
             updateSettings(e) {
                 this.SET_SETTINGS([e.target.name , e.target.value]);
+            },
+            openExport() {
+              window.open('app://./index.html/export');
             },
             ...mapActions([
                 types.FETCH_DAYS,

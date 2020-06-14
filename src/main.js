@@ -5,6 +5,7 @@ import store from './store'
 import Home from "@/views/Home";
 import Settings from "@/views/Settings";
 import Single from "@/views/Single";
+import Edit from "@/views/Edit";
 
 require('@/assets/main.scss');
 require('animate.css');
@@ -16,6 +17,7 @@ Vue.use(VueRouter);
 const routes = [
     {path: '/', component: Home},
     {path: '/settings', component: Settings},
+    {path: '/export', component: Edit},
     {path: '/show/:date', component: Single}
 ];
 

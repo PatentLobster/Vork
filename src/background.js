@@ -81,6 +81,7 @@ const isDevelopment = process.env.NODE_ENV !== 'production';
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let win;
+let secWin;
 let tray;
 
 const createTray = () => {
@@ -173,7 +174,34 @@ function createWindow() {
 
     win.on('closed', () => {
         win = null
-    })
+    });
+
+    win.webContents.on('new-window', (event, url) => {
+        event.preventDefault();
+        secWin = new BrowserWindow({
+            width: 600,
+            height: 600,
+            show: true,
+            frame: true,
+            alwaysOnTop: false,
+            transparent: false,
+            fullscreenable: true,
+            skipTaskbar: false,
+            icon: path.join(__static, 'icon.png'),
+            webPreferences: {
+                nodeIntegration: process.env.ELECTRON_NODE_INTEGRATION
+            }
+        });
+        if (process.env.WEBPACK_DEV_SERVER_URL) {
+            // Load the url of the dev server if in development mode
+            secWin.loadURL(process.env.WEBPACK_DEV_SERVER_URL + "#/export");
+            // if (!process.env.IS_TEST) win.webContents.openDevTools()
+        } else {
+            createProtocol('app');
+            // Load the index.html when not in development
+            secWin.loadURL('app://./index.html/#/export');
+        }
+    });
 }
 
 // Quit when all windows are closed.
@@ -205,6 +233,7 @@ app.on('ready', async () => {
         log_out();
     });
 
+
     if (isDevelopment && !process.env.IS_TEST) {
         // Install Vue Devtools
         // Devtools extensions are broken in Electron 6.0.0 and greater
@@ -222,6 +251,8 @@ app.on('ready', async () => {
     log_in();
     createTray();
     createWindow();
+
+
 });
 
 // Exit cleanly on request from parent process in development mode.

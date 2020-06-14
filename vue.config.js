@@ -6,6 +6,7 @@ module.exports = {
       externals: ['nedb'],
       nodeIntegration: true,
       enableRemoteModule: true,
+      nativeWindowOpen: true,
       publish: ['github']
     }
   }

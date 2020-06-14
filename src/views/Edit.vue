@@ -1,10 +1,9 @@
 <template>
-    <h1>{{content}}</h1>
-    <div v-html="content"></div>
+    <div>
     <Editor
-            height="300px"
+            height="600px"
             ref="editor"
-            :content="firstContent"
+            :content="JSON.stringify(days,null, '\t')"
             :options="{
         enableBasicAutocompletion: true,
         enableSnippets: true,
@@ -12,20 +11,25 @@
         tabSize:2
     }"
             :fontSize='14'
-            :lang="'javascript'"
-            :theme="'dark'"
-            @onChange="editorChange"
-            @init="editorInit">
-
+            lang="json"
+            @onChange="editorChange">
     </Editor>
+    </div>
 </template>
 
 <script>
     import Editor from "@/components/Editor";
+    import {mapActions, mapState} from "vuex";
+    import types from "@/store/types";
     export default {
         name: "Edit",
         components: {
           Editor
+        },
+        computed: {
+            ...mapState([
+                'days',
+            ]),
         },
         data() {
             return {
@@ -50,8 +54,14 @@
             },
             editorPaste(editor) {
                 console.log("pase", editor);
-            }
-        }
+            },
+            ...mapActions([
+                types.FETCH_ALL_DAYS,
+            ]),
+        },
+        created() {
+            this.FETCH_ALL_DAYS();
+        },
     }
 </script>
 
