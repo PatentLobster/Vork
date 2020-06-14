@@ -3,6 +3,7 @@ import VueRouter from "vue-router";
 import App from './App.vue'
 import store from './store'
 import Home from "@/views/Home";
+import Settings from "@/views/Settings";
 import Single from "@/views/Single";
 
 require('@/assets/main.scss');
@@ -14,6 +15,7 @@ Vue.use(VueRouter);
 
 const routes = [
     {path: '/', component: Home},
+    {path: '/settings', component: Settings},
     {path: '/show/:date', component: Single}
 ];
 

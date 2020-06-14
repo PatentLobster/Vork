@@ -265,45 +265,6 @@ ol {
 
   }
 
-  .reload-btn {
-    border: 2px solid rgba(#FFF, 0.6);
-    border-radius: 10%;
-    box-shadow: 0px 10px 30px -14px #000;
-    position: absolute;
-    display: none;
-    top: 50%;
-    transform: translateY(-50%);
-    right: 40px;
-    cursor: pointer;
-    transition: all 350ms ease;
-    transition-timing-function: cubic-bezier(0.05, 1.8, 1, 1.57);
-
-    &:hover {
-      transform: translateY(-40%);
-    }
-
-    i {
-      font-size: 22px;
-      font-weight: 700;
-      background: #fff;
-      color: #777;
-      width: 45px;
-      height: 45px;
-      border: 6px solid #485fed;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    &:active {
-      top: 52%;
-      transform: translatey(-52%);
-      right: 38px;
-      box-shadow: 0px 8px 30px -14px #000;
-    }
-  }
-
   .daily-target {
     position: absolute;
     display: inline-block;
@@ -370,6 +331,50 @@ ol {
     }
   }
 }
+
+
+.settings-btn {
+  border: 2px solid rgba(#FFF, 0.6);
+  -webkit-app-region: default !important;
+  border-radius: 10%;
+  box-shadow: 0px 10px 30px -14px #000;
+  position: absolute;
+  //display: none;
+  //top: 50%;
+  bottom: 0%;
+  left: 80%;
+  transform: translateY(-50%);
+  //right: 40px;
+  cursor: pointer;
+  transition: all 350ms ease;
+  transition-timing-function: cubic-bezier(0.05, 1.8, 1, 1.57);
+
+  &:hover {
+    transform: translateY(-40%);
+  }
+
+  svg {
+    font-size: 20px;
+    //font-weight: 700;
+    background: #fff;
+    color: #777;
+    width: 25px;
+    height: 25px;
+    border: 2px solid #485fed;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &:active {
+    bottom: -3%;
+    transform: translatey(-52%);
+    //right: 38px;
+    box-shadow: 0px 8px 30px -14px #000;
+  }
+}
+
 
 body {
   //background-color: #31353D;

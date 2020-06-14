@@ -16,7 +16,8 @@
         computed: {
             ...mapState([
                 'firstLogin',
-                'dailyGoal'
+                'dailyGoal',
+                'settings'
             ]),
         },
         data: () => {
@@ -26,7 +27,7 @@
         },
         methods: {
             updateClock() {
-                const hoursToGo = 9;
+                let hoursToGo = (this.settings.countDown) ? this.settings.countDown : 9;
                 const goal = moment(this.firstLogin, "HH:mm:ss").add(hoursToGo, "hours");
                 const now = moment(new Date(), "HH:mm:ss");
                 const offset = goal.diff(now);
