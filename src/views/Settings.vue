@@ -3,13 +3,26 @@
         <div class="today-box">
             <h1 class="date-title">Settings</h1>
         </div>
-        <router-link to="/" class="go-back">Back</router-link>
         <div class="list-wrapper settings-view">
+        <router-link to="/" class="go-back">Back</router-link>
             <div class="settings-form">
                 <label for="countDown"> Hours to count: </label>
-                <input type="number" max="12" min="1" :value="settings.countDown" name="countDown" @change="updateSettings">
-                <div @click="openExport">Export data</div>
+
+                <div class="range">
+                    <input type="range" min="1" max="12" steps="1" :value="settings.countDown" name="countDown" @change="updateSettings">
+                </div>
+                <ul class="range-labels">
+                    <li v-for="i in 12" :key="i" :for="i" :id="i" name="countDown" :class="[ {'active selected': (i == (settings.countDown ? settings.countDown : 9 )) } ]" @click="updateSlider">
+                        {{i}}
+                    </li>
+                </ul>
+                <button @click="openExport">Export data</button>
+
+
+
             </div>
+
+
         </div>
 
     </div>
@@ -24,7 +37,7 @@
         computed: {
             ...mapState([
                 'settings',
-            ]),
+            ])
         },
         methods: {
             getSettings() {
@@ -32,6 +45,10 @@
             },
             updateSettings(e) {
                 this.SET_SETTINGS([e.target.name , e.target.value]);
+            },
+            updateSlider(e) {
+                this.SET_SETTINGS(["countDown" , e.target.id]);
+                // console.log(e);
             },
             openExport() {
               window.open('app://./index.html/export');
@@ -44,6 +61,7 @@
         },
         created() {
             this.getSettings();
+
         }
     }
 </script>
