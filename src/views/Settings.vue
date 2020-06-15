@@ -17,9 +17,14 @@
                     </li>
                 </ul>
                 <button @click="openExport">Export data</button>
-
-
-
+                <h4>Disable transitions:</h4>
+                <div class="toggle-container">
+                <li class="tg-list-item">
+                <input class="tgl tgl-flip" type="checkbox" id="flip" :checked="settings.disableAnimations" name="disableAnimations" @click="updateCheckBox" />
+                <label class="tgl-btn" data-tg-off="Nope" data-tg-on="Yeah!" for="flip">
+                </label>
+                </li>
+                </div>
             </div>
 
 
@@ -49,6 +54,21 @@
             updateSlider(e) {
                 this.SET_SETTINGS(["countDown" , e.target.id]);
                 // console.log(e);
+            },
+            updateCheckBox(e) {
+                // console.log((this.settings[e.target.name])? !this.settings[e.target.name] : false);
+                let toggle;
+                if (this.settings[e.target.name] === "") {
+                  toggle = true;
+                } else {
+                    toggle = !this.settings[e.target.name];
+                }
+                this.SET_SETTINGS([
+                    e.target.name ,
+                    toggle
+                ]);
+                // console.log(e.target.name , e);
+                // console.log(this.settings);
             },
             openExport() {
               window.open('app://./index.html/export');

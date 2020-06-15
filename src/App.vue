@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-      <transition name="flip">
+      <transition :name="(!settings.disableAnimations)? 'flip' : ''">
         <router-view />
       </transition>
   </div>
@@ -9,8 +9,24 @@
 <script>
 
 
+    import {mapActions, mapState} from "vuex";
+    import types from "@/store/types";
+
 export default {
   name: 'App',
+  computed: {
+    ...mapState([
+        'settings',
+    ])
+  },
+  methods: {
+      ...mapActions([
+          types.GET_SETTINGS,
+      ]),
+  },
+  created() {
+       this.GET_SETTINGS();
+    }
 }
 </script>
 
