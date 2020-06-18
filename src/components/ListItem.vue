@@ -1,5 +1,5 @@
 <template>
-    <div class="home-day" :class="[isToday ? 'today' : '' , ClassObj]">
+    <div class="home-day" :class="[isToday ? 'today' : '' ]">
         <div class="date">
             <span v-if="lists._id">
                 <router-link :to="`/show/${lists.date}`">
@@ -25,7 +25,6 @@
                 hours: [],
                 firstLogin: null,
                 showingHours: false,
-                colorClass: "",
                 isToday: false,
             }
         },
@@ -38,9 +37,6 @@
             },
             CurrentHumanDay() {
                 return this.DateObj.format("dddd");
-            },
-            ClassObj() {
-                return "co-" + Math.floor(Math.floor(Math.random() * 10) % 11 + 1);
             },
         },
         methods: {
@@ -79,8 +75,7 @@
         },
         created() {
             this.isToday = moment(this.lists.date).isSame(moment(new Date()).format("YYYY-MM-DD"));
-            this.resetState();
-            this.colorClass = "co-" + Math.floor(Math.floor(Math.random() * 10) % 11 + 1);
+            // this.resetState();
         },
         watch: {
             lists: function (n, o) {

@@ -1,7 +1,7 @@
 <template>
     <div>
     <Editor
-            height="600px"
+            height="100vh"
             ref="editor"
             :content="JSON.stringify(days,null, '\t')"
             :options="{
