@@ -1,8 +1,10 @@
 'use strict';
 /* global __static */
-import {app, protocol, BrowserWindow, powerMonitor, Tray, Menu, Notification} from 'electron';
+import {app, protocol, BrowserWindow, powerMonitor, Tray, Menu, Notification, powerSaveBlocker} from 'electron';
 import {autoUpdater} from 'electron-updater';
 
+
+const preventSleep = powerSaveBlocker.start('prevent-display-sleep');
 const axios = require('axios');
 
 
