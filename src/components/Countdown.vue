@@ -1,9 +1,9 @@
 <template>
     <div v-if="timeLeft" class="daily-target ">
         <p>
-        {{firstLogin}} |
-        {{goal}} |
-        {{ timeLeft }}
+          <span class="login">{{firstLogin}}</span> |
+          <span class="goal"> {{goal}} </span> |
+          <span class="time-left">{{ timeLeft }} </span>
         </p>
     </div>
 </template>

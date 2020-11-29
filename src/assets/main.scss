@@ -141,7 +141,7 @@ select {
   --1: #B03060;
   --2: #FE9A76;
   --3: #FFD700;
-  --4: #32CD32;
+  --4: #32cd32;
   --5: #816936;
   --6: #008080;
   --7: #0E6EB8;
@@ -216,7 +216,7 @@ ol {
   display: flex;
   padding-left: 4px;
   padding-right: 4px;
-  cursor: move;
+  //cursor: ;
   align-content: center;
   justify-content: center;
   .daily-target {
@@ -357,7 +357,8 @@ ol {
 
 .go-back {
   position: absolute;
-  top: 100px;
+  top: 15px;
+  z-index: 999;
   left: 0;
   padding: 10px;
   border-top-right-radius: 20px;
@@ -409,7 +410,7 @@ ol {
     margin-left: auto;
   }
   .go-back {
-    top: 25%;
+    top: 45%;
   }
   h4 {
     padding: 0;
@@ -667,4 +668,16 @@ body {
     //flex-direction: column;
   }
 
+}
+
+.login {
+  color: var(--7);
+}
+
+.goal {
+  color: var(--9);
+}
+
+.time-left {
+  color: var(--10);
 }

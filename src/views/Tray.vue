@@ -13,6 +13,7 @@
                       is-dark
                       ref="calendar"
                       v-on:update:to-page="setMonth($event)"
+                      v-on:dayclick="checkDay($event)"
           ></v-calendar>
        </div>
 
@@ -61,6 +62,13 @@ export default {
       const month = `${event.year}-${(event.month <= 9) ? "0" + event.month.toString() : event.month }`;
 
       this.FETCH_DAYS(month);
+    },
+    checkDay(e) {
+
+      const res = this.days.filter(day => day.dates === e.id);
+      if(res !== []) {
+        this.$router.push(`/show/${e.id}`)
+      }
     },
     getRows() {
       this.FETCH_DAYS(this.currentMonth);
