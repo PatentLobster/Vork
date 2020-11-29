@@ -1,8 +1,10 @@
 <template>
-    <div v-if="timeLeft" class="daily-target">
-        <span>First Login: {{firstLogin}}</span>
-        <span>Goal: {{goal}}</span>
-        <span>Time left: {{ timeLeft }}</span>
+    <div v-if="timeLeft" class="daily-target ">
+        <p>
+        {{firstLogin}} |
+        {{goal}} |
+        {{ timeLeft }}
+        </p>
     </div>
 </template>
 

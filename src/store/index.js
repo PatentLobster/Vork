@@ -10,6 +10,17 @@ import moment from 'moment';
 const db = remote.getGlobal('db');
 Vue.use(Vuex);
 
+
+function createParagraph (day) {
+
+    const first = day.clockIn[0]
+    const last  = day.clockOut[day.clockOut.length - 1];
+
+    return moment.utc(moment(last, "HH:mm:ss").diff(moment(first, "HH:mm:ss"))).format("HH:mm:ss");
+    // return "lol";
+}
+
+
 export default new Vuex.Store({
     state: {
         days: [],
@@ -55,52 +66,45 @@ export default new Vuex.Store({
         },
         [types.FETCH_DAYS]({commit}, month) {
             db.find({date: new RegExp(`\\b${month}[^]*\\b`, 'i')}, (err, result) => {
-                let response = [];
-                let i;
-                let index = 0;
-
                 const dateObj = new Date();
-                const lastDay = parseInt(moment(dateObj, "YYYY-MM-DD").endOf("month").format("DD"));
-                const firstDay = parseInt(moment(dateObj, "YYYY-MM-DD").startOf("month").format("E"));
-                const prevMonthLastDay = parseInt(moment(month, "YYYY-MM").subtract(1, "month").endOf("month").format("DD"));
-                const lastMonth = moment(month, "YYYY-MM").subtract(1, "month").endOf("month").format("YYYY-MM");
+
+                const arr = [
+                    ...result.map(day => (
+                        {
+                            dates: (day.date),
+                            dot: {
+                                color: 'red',
+                                class: "testing-dot"
+                            },
+                            popover: {
+                                label: createParagraph(day),
+                            },
+                        }))
+                ];
+
+                console.log (arr)
 
 
-                // Fill the blank spots.
-                i = 1;
-                for (i = 1; i <= parseInt(lastDay); i++) {
-                    const d = (i < 10) ? `0${i}` : i;
-                    const doc = {
-                        clockIn: [],
-                        clockOut: [],
-                        "date": `${month}-${d}`,
-                    };
-                    let srcObj = result.filter(obj => {
-                        return obj.date == doc.date;
-                    });
-                    const mergeObj = {...doc, ...srcObj[0]};
-                    response.push(mergeObj);
-                }
 
-                // Fill days til sunday
-                for (i = firstDay; i > 0; i--) {
-                    const d = (i === firstDay) ? prevMonthLastDay : prevMonthLastDay - index;
-                    const doc = {
-                        clockIn: [],
-                        clockOut: [],
-                        "date": `${lastMonth}-${d}`,
-                    };
-                    index++;
-                    response.unshift(doc);
-                }
-
-                commit(types.SET_DAYS, response);
-
-                const today = moment(dateObj, "YYYY-MM-DD").format("YYYY-MM-DD");
+                const today = moment(dateObj, "YYYY-MM-DD").format("YYYY-MM-DD").toString();
 
                 let todayObj = result.filter(obj => {
-                    return obj.date == today;
+                    return obj.date === today;
                 });
+
+                const todayProp = {
+                    key: 'today',
+                    highlight: {
+
+                        fillMode: 'solid',
+                        contentClass: 'italic',
+                    },
+                    dates: today
+                }
+
+                arr.push(todayProp);
+
+                commit(types.SET_DAYS, arr);
 
                 const firstLoginObj = moment(todayObj[0].clockIn[0], "HH:mm:ss");
                 commit(types.SET_CURRENT, firstLoginObj.format("HH:mm:ss"));
