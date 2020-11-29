@@ -15,6 +15,7 @@ import path from "path";
 
 const globalAny = global;
 globalAny.db = db;
+
 db.ensureIndex({fieldName: 'date', unique: true}, function (err) {
     // console.log(err);
 });
@@ -121,6 +122,7 @@ const toggleWindow = () => {
         }
     }
 };
+globalAny.toggleWindow = toggleWindow;
 const showWindow = () => {
     // createWindow()
     win.loadFile('app://./index.html');

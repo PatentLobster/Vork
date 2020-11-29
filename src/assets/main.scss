@@ -245,6 +245,7 @@ ol {
     display: inline-block;
     height: 15px;
     width: 15px;
+    margin-right: auto;
     background-color: #ff6259;
     border-radius: 100%;
     margin-top: 4px;
@@ -255,7 +256,7 @@ ol {
 
 .settings-btn {
   display: inline-block;
-  margin-left: 4px;
+  margin-right: 8px;
    -webkit-app-region: no-drag;
   cursor: pointer;
   svg {

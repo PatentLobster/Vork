@@ -17,8 +17,27 @@ function createParagraph (day) {
     const last  = day.clockOut[day.clockOut.length - 1];
 
     return moment.utc(moment(last, "HH:mm:ss").diff(moment(first, "HH:mm:ss"))).format("HH:mm:ss");
-    // return "lol";
 }
+
+function getDotColor (day, settings) {
+
+    const first = day.clockIn[0]
+    const last  = day.clockOut[day.clockOut.length - 1];
+    let hoursToGo;
+    const sum = moment.utc(moment(last, "HH:mm:ss").diff(moment(first, "HH:mm:ss"))).format("HH:mm:ss");
+    console.log(goal);
+    hoursToGo = (settings.countDown) ? settings.countDown : 9;
+
+    const goal = moment(first, "HH:mm:ss").add(hoursToGo, "hours");
+    const timeLeft = moment.utc(moment(sum, "HH:mm:ss").diff(moment(first, "HH:mm:ss")))
+    if (timeLeft > 0 ) {
+        console.log(timeLeft.format("hh"));
+        console.log((Number(moment.utc(timeLeft).format("H")) > settings.countDown));
+        return "green";
+    }
+    return "red";
+}
+
 
 
 export default new Vuex.Store({
@@ -73,7 +92,7 @@ export default new Vuex.Store({
                         {
                             dates: (day.date),
                             dot: {
-                                color: 'red',
+                                color: getDotColor(day, this.state.settings),
                                 class: "testing-dot"
                             },
                             popover: {
