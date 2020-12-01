@@ -1,6 +1,6 @@
 <template>
 
-<div class="wrapper">
+  <div class="wrapper">
     <div class="top-bar">
       <span class="close" v-on:click="closeWindow()"/>
       <router-link to="/" class="settings-btn">
@@ -10,32 +10,28 @@
     <div class="bar">
 
 
-<div class="vc-container vc-is-dark list-wrapper">
-  <div class="vc-pane">
+      <div class="vc-container vc-is-dark list-wrapper">
+        <div class="vc-pane">
 
-    <h2 class="date-title"> {{CurrentHumanDay}} </h2>
-    <p class="date-title"> {{ CurrentHumanDate }} </p>
-
-
-    <span v-if="firstLogin" class="details">First login: {{firstLogin}}</span>
-    <span v-if="lastLogout" class="details">Last logout: {{lastLogout}}</span>
-    <span v-if="lastLogout" class="details">Total: {{totalHours}}</span>
-
-    <div class="table" v-if="hours[0]">
-                    <h4>Clock table:</h4>
-                    <li v-for="(hour, i) in hours" :key="i">
-                        {{hour.gotIn}} - {{hour.gotOut}} - {{hour.total}}
-                    </li>
-                </div>
-
-  </div>
-</div>
+          <h2 class="date-title"> {{ CurrentHumanDay }} </h2>
+          <p class="date-title"> {{ CurrentHumanDate }} </p>
 
 
+          <span v-if="firstLogin" class="details">First login: {{ firstLogin }}</span>
+          <span v-if="lastLogout" class="details">Last logout: {{ lastLogout }}</span>
+          <span v-if="lastLogout" class="details">Total: {{ totalHours }}</span>
+
+          <div class="table" v-if="hours[0]">
+            <h4>Clock table:</h4>
+            <li v-for="(hour, i) in hours" :key="i">
+              {{ hour.gotIn }} - {{ hour.gotOut }} - {{ hour.total }}
+            </li>
+          </div>
+
+        </div>
       </div>
     </div>
-
-
+  </div>
 
 
 </template>
@@ -43,9 +39,8 @@
 <script>
     import {mapActions, mapState} from 'vuex';
     import types from '../store/types';
-    import {remote} from 'electron'
 
-    const winToggle = remote.getGlobal('toggleWindow');
+
 
     const moment = require('moment');
     export default {
@@ -90,9 +85,6 @@
                 this.FETCH_CURRENT(this.$route.params.date);
                 this.hours = [];
             },
-          closeWindow() {
-            winToggle();
-          },
         },
         created() {
             this.resetState();
@@ -107,5 +99,7 @@
 .vc-container {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
+  min-height: 275px;
+  overflow-y: auto;
 }
 </style>

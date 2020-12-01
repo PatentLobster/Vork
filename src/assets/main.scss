@@ -135,26 +135,21 @@ select {
   align-items: center;
   flex-direction: column;
   width: 100%;
-  //min-width: 80%;
-  //width: auto;
   height: 100%;
-
 }
-
 
 .bar {
   background: linear-gradient(to bottom, #cdcdcd, #e5e5e5);
   width: 100%;
   display: flex;
-  min-width: 270px;
-
+  min-width: 250px;
+ flex-direction: column;
   padding-left: 4px;
   padding-top: 3px;
-  padding-right: 4px;
-  //cursor: ;
-  flex-direction: column;
-  max-width: 85vh;
   padding-bottom: 5px;
+  padding-right: 4px;
+  margin: 0 auto;
+  max-width: 85vh;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
   align-content: center;
