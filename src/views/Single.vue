@@ -1,23 +1,27 @@
 <template>
 
-      <div class="wrapper">
-        <div class="top-bar">
-          <span class="close" v-on:click="closeWindow()"/>
-        </div>
-        <div class="bar">
-                <span v-if="firstLogin" class="details">First login: {{firstLogin}}</span>
-                <span v-if="lastLogout" class="details">Last logout: {{lastLogout}}</span>
-                <span v-if="lastLogout" class="details">Total: {{totalHours}}</span>
+<div class="wrapper">
+    <div class="top-bar">
+      <span class="close" v-on:click="closeWindow()"/>
+      <router-link to="/" class="settings-btn">
+        <svg></svg>
+      </router-link>
+    </div>
+    <div class="bar">
 
-        </div>
 
 <div class="vc-container vc-is-dark list-wrapper">
   <div class="vc-pane">
-        <router-link to="/" class="go-back">Back</router-link>
+
     <h2 class="date-title"> {{CurrentHumanDay}} </h2>
     <p class="date-title"> {{ CurrentHumanDate }} </p>
 
-                <div class="table" v-if="hours[0]">
+
+    <span v-if="firstLogin" class="details">First login: {{firstLogin}}</span>
+    <span v-if="lastLogout" class="details">Last logout: {{lastLogout}}</span>
+    <span v-if="lastLogout" class="details">Total: {{totalHours}}</span>
+
+    <div class="table" v-if="hours[0]">
                     <h4>Clock table:</h4>
                     <li v-for="(hour, i) in hours" :key="i">
                         {{hour.gotIn}} - {{hour.gotOut}} - {{hour.total}}
@@ -29,6 +33,10 @@
 
 
       </div>
+    </div>
+
+
+
 
 </template>
 
@@ -81,42 +89,13 @@
             resetState() {
                 this.FETCH_CURRENT(this.$route.params.date);
                 this.hours = [];
-
-                this.today.clockOut.reduce((acc, current) => {
-                    let gotOut = moment(current, 'HH:mm:ss');
-                    gotOut.format("HH:mm:ss");
-
-                    // Gets the first logout after login.
-                    const BreakException = "lol"; // In order to get out of the foreach we need some sort of exception
-                                                  // Ref: https://stackoverflow.com/questions/2641347/short-circuit-array-foreach-like-calling-break
-                    try {
-                       this.today.clockIn.forEach((e) => {
-                            let gotIn = moment(e, 'HH:mm:ss');
-                            if (gotIn.isBefore(gotOut)) {
-                                this.hours.push({
-                                    gotIn: gotIn.format("HH:mm:ss"),
-                                    gotOut: gotOut.format("HH:mm:ss"),
-                                    total: moment.utc(gotOut.diff(gotIn)).format("HH:mm:ss")
-                                });
-                                throw BreakException;
-                            }
-                        });
-                    } catch (er) {
-                        if (er !== BreakException)
-                            console.log(er);
-                    }
-
-                }, []);
-
             },
           closeWindow() {
             winToggle();
           },
         },
         created() {
-            this.FETCH_CURRENT(this.$route.params.date);
             this.resetState();
-            console.log(this.today);
         },
 
     }
@@ -124,18 +103,6 @@
 
 <style scoped>
 
-.wrapper {
-  display: flex;
-  justify-content: center;
-  align-content: center;
-  margin: 0 auto;
-  width: 80%;
-  flex-direction: column;
-}
-
-.list-wrapper {
-   width: 100%;
-}
 
 .vc-container {
   border-top-left-radius: 0;

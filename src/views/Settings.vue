@@ -1,36 +1,48 @@
 <template>
-    <div>
-        <div class="today-box">
-            <h1 class="date-title">Settings</h1>
-        </div>
-        <div class="list-wrapper settings-view">
-        <router-link to="/" class="go-back">Back</router-link>
-            <div class="settings-form">
-                <label for="countDown"> Hours to count: </label>
-
-                <div class="range">
-                    <input type="range" min="1" max="12" steps="1" :value="settings.countDown" name="countDown" @change="updateSettings">
-                </div>
-                <ul class="range-labels">
-                    <li v-for="i in 12" :key="i" :for="i" :id="i" name="countDown" :class="[ {'active selected': (i == (settings.countDown ? settings.countDown : 9 )) } ]" @click="updateSlider">
-                        {{i}}
-                    </li>
-                </ul>
-                <button @click="openExport">Export data</button>
-                <h4>Disable transitions:</h4>
-                <div class="toggle-container">
-                <li class="tg-list-item">
-                <input class="tgl tgl-flip" type="checkbox" id="flip" :checked="settings.disableAnimations" name="disableAnimations" @click="updateCheckBox" />
-                <label class="tgl-btn" data-tg-off="Nope" data-tg-on="Yeah!" for="flip">
-                </label>
-                </li>
-                </div>
-            </div>
-
-
-        </div>
-
+  <div class="wrapper">
+    <div class="top-bar">
+      <span class="close" v-on:click="closeWindow()"/>
+      <router-link to="/" class="settings-btn">
+        <svg></svg>
+      </router-link>
     </div>
+    <div class="bar">
+
+
+      <h1 class="title">Settings</h1>
+
+      <div class="settings-view">
+
+        <div class="settings-form">
+          <label for="countDown"> Hours to count: </label>
+
+          <div class="range">
+            <input type="range" min="1" max="12" steps="1" :value="settings.countDown" name="countDown"
+                   @change="updateSettings">
+          </div>
+          <ul class="range-labels">
+            <li v-for="i in 12" :key="i" :for="i" :id="i" name="countDown"
+                :class="[ {'active selected': (i == (settings.countDown ? settings.countDown : 9 )) } ]"
+                @click="updateSlider">
+              {{ i }}
+            </li>
+          </ul>
+          <button @click="openExport">Export data</button>
+          <h4>Disable transitions:</h4>
+          <div class="toggle-container">
+            <li class="tg-list-item">
+              <input class="tgl tgl-flip" type="checkbox" id="flip" :checked="settings.disableAnimations"
+                     name="disableAnimations" @click="updateCheckBox"/>
+              <label class="tgl-btn" data-tg-off="Nope" data-tg-on="Yeah!" for="flip">
+              </label>
+            </li>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -53,10 +65,10 @@
             },
             updateSlider(e) {
                 this.SET_SETTINGS(["countDown" , e.target.id]);
-                // console.log(e);
+
             },
             updateCheckBox(e) {
-                // console.log((this.settings[e.target.name])? !this.settings[e.target.name] : false);
+
                 let toggle;
                 if (this.settings[e.target.name] === "") {
                   toggle = true;
@@ -67,8 +79,6 @@
                     e.target.name ,
                     toggle
                 ]);
-                // console.log(e.target.name , e);
-                // console.log(this.settings);
             },
             openExport() {
               window.open('app://./index.html/export');

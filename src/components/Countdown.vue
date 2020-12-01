@@ -1,9 +1,9 @@
 <template>
-    <div v-if="timeLeft" class="daily-target ">
+    <div class="daily-target ">
         <p>
-          <span class="login">{{firstLogin}}</span> |
-          <span class="goal"> {{goal}} </span> |
-          <span class="time-left">{{ timeLeft }} </span>
+          <span class="login" v-text="firstLogin" > 04:20:00 </span> |
+          <span class="goal" v-text="goal" > 04:20:00 </span> |
+          <span class="time-left" v-text="timeLeft" > 04:20:00 </span>
         </p>
     </div>
 </template>
@@ -23,7 +23,7 @@
         },
         data: () => {
             return {
-                timeLeft: null,
+                timeLeft: "00:04:20",
                 goal: "00:04:20",
             }
         },
