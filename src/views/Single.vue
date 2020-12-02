@@ -105,5 +105,6 @@
   border-top-right-radius: 0;
   min-height: 275px;
   overflow-y: auto;
+  width: 100%!important;
 }
 </style>
