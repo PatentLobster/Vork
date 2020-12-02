@@ -21,13 +21,18 @@
           <span v-if="lastLogout" class="details">Last logout: {{ lastLogout }}</span>
           <span v-if="lastLogout" class="details">Total: {{ totalHours }}</span>
 
-          <div class="table" v-if="hours[0]">
-            <h4>Clock table:</h4>
-            <li v-for="(hour, i) in hours" :key="i">
-              {{ hour.gotIn }} - {{ hour.gotOut }} - {{ hour.total }}
+          <div class="timeline">
+
+            <li v-for="(hour, i) in 24" :key="i" :class="`hours in-${(hour > 10)? hour-1 : ('0' + (hour-1).toString()) }`">
+              {{i}}
+            </li>
+
+            <li v-for="(hour, i) in clockIns" :key="i" :class="`in-${hour.slice(0,2)}`">
+            </li>
+
+            <li v-for="(hour, i) in clockOuts" :key="i" :class="`out in-${hour.slice(0,2)}`">
             </li>
           </div>
-
         </div>
       </div>
     </div>
@@ -94,7 +99,6 @@
 </script>
 
 <style scoped>
-
 
 .vc-container {
   border-top-left-radius: 0;
