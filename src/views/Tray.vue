@@ -10,7 +10,8 @@
 
 
           <v-calendar :attributes='days'
-                      is-dark
+                      :is-dark="(settings.darkMode == undefined)? true : settings.darkMode"
+                      :color="(settings.color == undefined)? '' : settings.color"
                       ref="calendar"
                       v-on:update:to-page="setMonth($event)"
                       v-on:dayclick="checkDay($event)"

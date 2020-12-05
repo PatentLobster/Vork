@@ -27,7 +27,7 @@
               {{ i }}
             </li>
           </ul>
-          <button @click="openExport">Export data</button>
+
           <h4>Disable transitions:</h4>
           <div class="toggle-container">
             <li class="tg-list-item">
@@ -37,9 +37,27 @@
               </label>
             </li>
           </div>
+
+          <label class="darkMode-label" for="darkMode">Dark mode:</label>
+
+              <input class="darkMode" type="checkbox" :checked="(settings.darkMode == undefined)? true : settings.darkMode"
+                     name="darkMode" @click="updateCheckBox"/>
+
+        <div class="color-labels">
+          <h4>Color:</h4>
+            <button v-for="color in colors"
+                    v-text="color"
+                    :class="`color-btn ${color.toLowerCase()} ${(color.toLowerCase() === settings.color)? 'active' : ''}`"
+                    :key="color"
+                    name="color"
+                    :value="`${color.toLowerCase()}`"
+                    @click="updateSettings"
+            />
         </div>
 
+          <button @click="openExport">Export data</button>
 
+        </div>
       </div>
     </div>
   </div>
@@ -51,6 +69,16 @@
     import types from "@/store/types";
     export default {
         name: "Settings",
+        data: () => {
+          return {
+            'colors': [ 'Gray', 'Red',
+                       'Orange', 'Yellow',
+                       'Green', 'Teal',
+                        'Blue', 'Indigo',
+                        'Purple', 'Pink'
+                      ],
+          }
+        },
         computed: {
             ...mapState([
                 'settings',
@@ -68,7 +96,7 @@
 
             },
             updateCheckBox(e) {
-
+                console.log(e.target.name);
                 let toggle;
                 if (this.settings[e.target.name] === "") {
                   toggle = true;
@@ -97,5 +125,44 @@
 </script>
 
 <style scoped>
+
+
+
+.darkMode-label {
+  display: inline-block;
+  margin-top: 1.3rem;
+  color: black;
+  font-weight: bold;
+}
+.darkMode {
+  top: 1x;
+  position: relative;
+}
+
+.color-btn {
+  display: inline-block;
+  padding: 8px;
+  margin: 8px 4px auto;
+
+  border-radius: 15%;
+  border: 0;
+  color: white;
+
+}
+
+.color-btn.active {
+  -webkit-box-shadow: inset 1px 1px 15px hsla(0, 0%, 20%, 0.4);
+  -moz-box-shadow:    inset 1px 1px 10px hsla(0, 0%, 20%, 0.4);
+  box-shadow:         inset 1px 1px 10px hsla(0, 0%, 20%, 0.4);
+}
+
+.settings-view {
+  overflow-y: scroll;
+}
+
+.settings-view h4 {
+  padding-top: 10px;
+}
+
 
 </style>

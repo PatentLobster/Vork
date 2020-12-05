@@ -109,19 +109,17 @@ select {
 // END OF RESET CSS
 
 // VARS
-:root {
-  --1: #B03060;
-  --2: #FE9A76;
-  --3: #FFD700;
-  --4: #32cd32;
-  --5: #816936;
-  --6: #008080;
-  --7: #0E6EB8;
-  --8: #EE82EE;
-  --9: #B413EC;
-  --10: #FF1493;
-  --11: #A52A2A;
-}
+
+.gray { background: #a0aec0}
+.yellow { background-color: #ecc94b; }
+.orange { background: #ed8936}
+.red { background: #f56565;}
+.green { background: #48bb78}
+.teal {background: #38b2ac}
+.blue {background: #4299e1}
+.indigo { background: #667eea}
+.purple { background: #9f7aea }
+.pink { background: #ed64a6 }
 
 
 .wrapper {
