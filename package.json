@@ -27,7 +27,7 @@
     "moment": "^2.26.0",
     "nedb": "^1.8.0",
     "sass": "^1.26.8",
-    "sass-loader": "^8.0.2",
+    "sass-loader": "^10.1.1",
     "v-calendar": "^2.1.1",
     "vue": "^2.6.11",
     "vue-router": "^3.3.2",
