@@ -9,6 +9,7 @@ import VCalendar from 'v-calendar';
 
 
 require('@/assets/main.scss');
+import './assets/tailwind.css'
 require('animate.css');
 Vue.config.productionTip = false;
 
@@ -39,11 +40,18 @@ const routes = [
 ];
 
 
+
 const router = new VueRouter({
     base: '/',
     routes
 });
 
+
+router.beforeEach((to, from, next) => {
+    console.log(to);
+    console.log(from);
+    next()
+})
 
 
 new Vue({

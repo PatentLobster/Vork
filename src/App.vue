@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" class="w-100">
 
     <transition :name="(!settings.disableAnimations)? 'flip' : ''">
         <router-view />

@@ -35,6 +35,15 @@ function getDotColor (day, settings) {
 }
 
 
+const getDefaultState = () => {
+    return {
+        today: {
+            clockIn: [],
+            clockOut: [],
+            "date": `2020-02-02`,
+        },
+    }
+}
 
 export default new Vuex.Store({
     state: {
@@ -63,6 +72,9 @@ export default new Vuex.Store({
         [types.FETCH_SETTINGS](state, payload) {
             state.settings = payload;
         },
+        [types.CLEAR_DAY](state) {
+          Object.assign(state, getDefaultState())
+        }
     },
     actions: {
         [types.GET_SETTINGS]({commit}) {
@@ -79,8 +91,8 @@ export default new Vuex.Store({
                 commit(types.SET_DAYS, result);
             });
         },
-        [types.FETCH_DAYS]({commit}, month) {
-            db.find({date: new RegExp(`\\b${month}[^]*\\b`, 'i')}, (err, result) => {
+        async [types.FETCH_DAYS]({commit}, month) {
+            await db.find({date: new RegExp(`\\b${month}[^]*\\b`, 'i')}, (err, result) => {
                 const dateObj = new Date();
 
                 const arr = [
@@ -120,7 +132,8 @@ export default new Vuex.Store({
                 commit(types.SET_CURRENT, firstLoginObj.format("HH:mm:ss"));
             });
         },
-        [types.FETCH_CURRENT]({commit}, request) {
+        [types.FETCH_CURRENT]({commit,dispatch}, request) {
+            dispatch(types.ACLEAR_DAY);
             db.find({date: request}, (err, result) => {
                 if (err || !result[0]) {
                     const doc = {
@@ -135,6 +148,9 @@ export default new Vuex.Store({
             });
         },
 
+        [types.ACLEAR_DAY]({commit}) {
+            commit( types.CLEAR_DAY)
+        }
     },
     modules: {},
 })

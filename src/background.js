@@ -148,7 +148,7 @@ protocol.registerSchemesAsPrivileged([{scheme: 'app', privileges: {secure: true,
 function createWindow() {
     // Create the browser window.
     win = new BrowserWindow({
-        width: 340,
+        width: 300,
         height: 340,
         show: true,
         frame: false,

@@ -1,0 +1,12 @@
+@tailwind base;
+
+@tailwind components;
+
+@tailwind utilities;
+
+#top-bar {
+  -webkit-app-region: drag!important;
+  -webkit-user-select: none!important;
+  cursor: move !important;
+}
+

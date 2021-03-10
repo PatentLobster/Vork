@@ -1,9 +1,9 @@
 <template>
-    <div class="daily-target ">
+    <div class="daily-target text-center">
         <p>
-          <span class="login" v-text="firstLogin" > 04:20:00 </span> |
-          <span class="goal" v-text="goal" > 04:20:00 </span> |
-          <span class="time-left" v-text="timeLeft" > 04:20:00 </span>
+          <span class="text-green-800" v-text="firstLogin" > 04:20:00 </span> |
+          <span class="text-cyan-700" v-text="goal" > 04:20:00 </span> |
+          <span class="text-pink-700" v-text="timeLeft" > 04:20:00 </span>
         </p>
     </div>
 </template>
