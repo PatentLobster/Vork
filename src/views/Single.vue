@@ -10,7 +10,7 @@
 
 
 
-    <div class="flex-row justify-center vc-container vc-is-dark text-center self-auto min-w-full min-h-max ">
+    <div class="flex-col justify-center vc-container vc-is-dark text-center self-auto min-w-full min-h-max ">
 
 
       <div class="flex-row">
@@ -23,7 +23,7 @@
           <span v-if="lastLogout" class="leading-1 block">Total: {{ totalHours }}</span>
      </div>
 
-      <Timebar :hours="hours" />
+<!--      <Timebar :hours="hours" />-->
       <div class=" block">
         <div class="overflow-ellipsis h-2 mb-4 text-xs flex rounded bg-gray-200 mb-7 mt-4 mx-1">
           <div v-for="(hour, i) in 24" :key="i"

@@ -4,7 +4,7 @@ import {app, protocol, BrowserWindow, powerMonitor, Tray, Menu, Notification, po
 import {autoUpdater} from 'electron-updater';
 
 
-const preventSleep = powerSaveBlocker.start('prevent-display-sleep');
+powerSaveBlocker.start('prevent-display-sleep');
 const axios = require('axios');
 
 
@@ -62,7 +62,7 @@ function greet() {
     axios.get("https://favqs.com/api/qotd").then((response) => {
         const quotes = response.data.quote.body;
         const author = response.data.quote.author;
-        const arr = {'title': author, 'body': quotes, 'icon': path.join(__static, "/icon.png")};
+        const arr = {'title': author, 'body': quotes, 'icon': path.join(__static, "/icon/48x48.png")};
         console.log(arr);
         return arr;
     }).then((arr) => callNotification(arr));
@@ -74,10 +74,9 @@ function callNotification(notif) {
 
 // End of App logic.
 
-import {
-    createProtocol,
-    installVueDevtools
-} from 'vue-cli-plugin-electron-builder/lib'
+import {createProtocol} from 'vue-cli-plugin-electron-builder/lib'
+
+import installExtension, { VUEJS_DEVTOOLS } from 'electron-devtools-installer'
 
 const isDevelopment = process.env.NODE_ENV !== 'production';
 
@@ -88,7 +87,7 @@ let secWin;
 let tray;
 
 const createTray = () => {
-    tray = new Tray(path.join(__static, "/icon.png"));
+    tray = new Tray(path.join(__static, "/icons/16x16.png"));
     const contextMenu = Menu.buildFromTemplate([
         {
             label: "Open Developer tools", click() {
@@ -104,7 +103,7 @@ const createTray = () => {
         }
     ]);
     tray.setToolTip("Vork is running");
-    tray.setContextMenu(contextMenu);
+    // tray.setContextMenu(toggleWindow);
     tray.on('click', function (event) {
         toggleWindow();
     })
@@ -136,8 +135,8 @@ const showWindow = () => {
 const getWindowPosition = () => {
     const windowBounds = win.getBounds();
     const trayBounds = tray.getBounds();
-    const x = Math.round(trayBounds.x - (windowBounds.width / 2.333));
-    const y = trayBounds.y - windowBounds.height + 5;
+    const x = Math.round(trayBounds.x );
+    const y = trayBounds.y;
     return {x: x, y: y}
 };
 
@@ -246,7 +245,7 @@ app.on('ready', async () => {
         // If you are not using Windows 10 dark mode, you may uncomment these lines
         // In addition, if the linked issue is closed, you can upgrade electron and uncomment these lines
         try {
-            await installVueDevtools()
+            await installExtension(VUEJS_DEVTOOLS)
         } catch (e) {
             console.error('Vue Devtools failed to install:', e.toString())
         }
