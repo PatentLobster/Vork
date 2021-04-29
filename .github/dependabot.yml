@@ -1,0 +1,46 @@
+version: 2
+updates:
+- package-ecosystem: npm
+  directory: "/"
+  schedule:
+    interval: daily
+    time: "03:00"
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: electron
+    versions:
+    - ">= 11.a, < 12"
+  - dependency-name: sass
+    versions:
+    - 1.32.11
+    - 1.32.8
+  - dependency-name: eslint-plugin-vue
+    versions:
+    - 7.5.0
+    - 7.6.0
+    - 7.7.0
+    - 7.8.0
+  - dependency-name: "@vue/cli-service"
+    versions:
+    - 4.5.11
+  - dependency-name: v-calendar
+    versions:
+    - 2.2.4
+  - dependency-name: electron
+    versions:
+    - 10.3.1
+    - 10.3.2
+    - 10.4.0
+    - 12.0.0
+  - dependency-name: eslint
+    versions:
+    - 7.20.0
+    - 7.21.0
+  - dependency-name: sass-loader
+    versions:
+    - 10.1.1
+    - 11.0.0
+    - 11.0.1
+  - dependency-name: "@vue/cli-plugin-router"
+    versions:
+    - 4.5.11
